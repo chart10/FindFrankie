@@ -1,11 +1,10 @@
 import './App.css';
+import SceneInit from './SceneInit';
 
 function App() {
   return (
     <>
-      <div>
-        <h1>Find Frankie!</h1>
-      </div>
+      <SceneInit />
     </>
   );
 }

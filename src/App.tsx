@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import * as THREE from 'three';
+// import * as THREE from 'three';
 import './App.css';
 import SceneInit from './library/SceneInit';
 
@@ -9,11 +9,11 @@ function App() {
     test.initialize();
     test.animate();
 
-    const boxGeometry = new THREE.BoxGeometry(16, 16, 16);
-    const boxMaterial = new THREE.MeshNormalMaterial();
-    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
+    // const boxGeometry = new THREE.BoxGeometry(16, 16, 16);
+    // const boxMaterial = new THREE.MeshNormalMaterial();
+    // const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
 
-    test.scene?.add(boxMesh);
+    // test.scene?.add(boxMesh);
   }, []);
 
   return (

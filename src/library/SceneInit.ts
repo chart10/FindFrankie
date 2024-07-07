@@ -3,41 +3,27 @@ import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 
 export default class SceneInit {
-  scene: THREE.Scene | undefined;
-  camera: THREE.PerspectiveCamera | undefined;
-  renderer: THREE.WebGLRenderer | undefined;
+  scene: THREE.Scene;
+  camera: THREE.PerspectiveCamera;
+  renderer: THREE.WebGLRenderer;
   fov: number;
   nearPlane: number;
   farPlane: number;
   canvasId: string;
-  clock: object | undefined;
-  stats: Stats | undefined;
-  controls: OrbitControls | undefined;
-  ambientLight: THREE.AmbientLight | undefined;
-  directionalLight: THREE.DirectionalLight | undefined;
+  clock: object;
+  stats: Stats;
+  controls: OrbitControls;
+  ambientLight: THREE.AmbientLight;
+  directionalLight: THREE.DirectionalLight;
+  testLight: THREE.PointLight;
+  loader: THREE.TextureLoader;
 
   constructor(canvasId: string) {
-    this.scene = undefined;
-    this.camera = undefined;
-    this.renderer = undefined;
-
-    // Camera params
     this.fov = 45;
-    this.nearPlane = 1;
-    this.farPlane = 1000;
+    this.nearPlane = 0.1;
+    this.farPlane = 100;
     this.canvasId = canvasId;
 
-    // Extra tools
-    this.clock = undefined;
-    this.stats = undefined;
-    this.controls = undefined;
-
-    // Lighting
-    this.ambientLight = undefined;
-    this.directionalLight = undefined;
-  }
-
-  initialize() {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(
       this.fov,
@@ -45,33 +31,91 @@ export default class SceneInit {
       1,
       1000
     );
-    this.camera.position.z = 48;
 
     const canvas = document.getElementById(this.canvasId)!;
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    this.loader = new THREE.TextureLoader();
+
+    // Camera params
+
+    // Extra tools
+    this.clock = new THREE.Clock();
+    this.stats = new Stats();
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
+    // Lighting
+    this.ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    this.directionalLight = new THREE.DirectionalLight(0xffffff, 5);
+    this.testLight = new THREE.PointLight(0xffffff, 100);
+  }
+
+  initialize() {
+    this.camera.position.set(0, 20, 40);
+
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer?.domElement);
 
-    this.clock = new THREE.Clock();
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.stats = new Stats();
     document.body.appendChild(this.stats.dom);
-
-    this.ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     this.ambientLight.castShadow = true;
-    this.scene.add(this.ambientLight);
-
-    this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     // this.directionalLight.castShadow = true;
-    this.directionalLight.position.set(0, 32, 64);
+    this.directionalLight.position.set(5, 10, 5);
     this.scene.add(this.directionalLight);
+    this.scene.add(this.testLight);
+
+    const lionWallTexture = this.loader.load(
+      'https://threejs.org/manual/examples/resources/images/wall.jpg'
+    );
+    lionWallTexture.colorSpace = THREE.SRGBColorSpace;
+
+    this.scene.background = new THREE.Color('#22223b');
+
+    // Plane
+    const planeSize = 40;
+    const loader = new THREE.TextureLoader();
+    const texture = loader.load(
+      'https://threejs.org/manual/examples/resources/images/checker.png'
+    );
+
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.magFilter = THREE.NearestFilter;
+    texture.colorSpace = THREE.SRGBColorSpace;
+    const repeats = planeSize / 2;
+    texture.repeat.set(repeats, repeats);
+    const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
+    const planeMat = new THREE.MeshPhongMaterial({
+      map: texture,
+      side: THREE.DoubleSide,
+    });
+    const mesh = new THREE.Mesh(planeGeo, planeMat);
+    mesh.rotation.x = Math.PI * -0.5;
+    this.scene.add(mesh);
+
+    // Cube
+    const boxGeometry = new THREE.BoxGeometry(4, 4, 4);
+    const boxMaterial = new THREE.MeshPhongMaterial({ color: '#ffc300' });
+    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
+    boxMesh.position.set(4 + 1, 2, 0);
+    this.scene.add(boxMesh);
+
+    // Sphere
+    const sphereRadius = 3;
+    const sphereWidthDivisions = 32;
+    const sphereHeightDivisions = 16;
+    const sphereGeo = new THREE.SphereGeometry(
+      sphereRadius,
+      sphereWidthDivisions,
+      sphereHeightDivisions
+    );
+    const sphereMat = new THREE.MeshPhongMaterial({ color: '#00b4d8' });
+    const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
+    sphereMesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
+    this.scene.add(sphereMesh);
 
     window.addEventListener('resize', () => this.onWindowResize(), false);
   }
 
   animate() {
-    // NOTE: Window is implied.
-    // requestAnimationFrame(this.animate.bind(this));
     window.requestAnimationFrame(this.animate.bind(this));
     this.render();
     this.stats?.update();
@@ -91,3 +135,18 @@ export default class SceneInit {
     this.renderer?.setSize(window.innerWidth, window.innerHeight);
   }
 }
+
+// class ColorGUIHelper {
+//   object: THREE.AmbientLight;
+//   prop: string;
+//   constructor(object: THREE.AmbientLight, prop: string) {
+//     this.object = object;
+//     this.prop = prop;
+//   }
+//   get value() {
+//     return `#${this.object[this.prop].getHexString()}`;
+//   }
+//   set value(hexString) {
+//     this.object[this.prop].set(hexString);
+//   }
+// }

@@ -15,20 +15,20 @@ export default class SceneInit {
   loader: THREE.TextureLoader;
   characterCount: number;
   characters: THREE.Mesh[];
+  raycaster: THREE.Raycaster;
+  pointer: THREE.Vector2;
 
   constructor(canvasId: string) {
     this.canvasId = canvasId;
     this.scene = new THREE.Scene();
     this.clock = new THREE.Clock();
     this.stats = new Stats();
-
     this.camera = new THREE.PerspectiveCamera(
       45,
       window.innerWidth / window.innerHeight,
       1,
       200
     );
-
     const canvas = document.getElementById(this.canvasId)!;
     this.renderer = new THREE.WebGLRenderer({
       canvas,
@@ -41,6 +41,19 @@ export default class SceneInit {
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 5);
     this.characterCount = 100;
     this.characters = [];
+    this.raycaster = new THREE.Raycaster();
+    this.pointer = new THREE.Vector2();
+    document.addEventListener('click', (event) => {
+      this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      console.log(this.pointer);
+
+      this.raycaster.setFromCamera(this.pointer, this.camera);
+      console.log(this.raycaster.ray.direction);
+      const intersects = this.raycaster.intersectObjects(this.scene.children);
+      console.log(intersects);
+      intersects[0].object.material.color.set(0xffffff);
+    });
   }
 
   initialize() {
@@ -56,11 +69,14 @@ export default class SceneInit {
     this.controls.autoRotateSpeed = 1;
     this.controls.minDistance = 30;
     this.controls.maxDistance = 100;
-    // this.controls.enableRotate = false;
+    this.controls.enableRotate = false;
 
     // console.log(this.camera);
     // console.log(this.controls);
-    console.log(this.scene.children);
+    this.raycaster.setFromCamera(this.pointer, this.camera);
+
+    // console.log(this.scene.children);
+    // console.log(this.raycaster);
 
     // Lighting
     {
@@ -96,12 +112,14 @@ export default class SceneInit {
     }
 
     // Create Civilian Sprites
-    const civilianMat = new THREE.MeshPhongMaterial({
-      color: 0x9b5de5,
-      side: THREE.DoubleSide,
-    });
+    // const civilianMat = ;
     for (let i = 0; i < this.characterCount; i++) {
-      this.createCharacterSprite(civilianMat);
+      this.createCharacterSprite(
+        new THREE.MeshPhongMaterial({
+          color: 0x9b5de5,
+          side: THREE.DoubleSide,
+        })
+      );
     }
 
     // Create Frankie Sprite
@@ -133,6 +151,12 @@ export default class SceneInit {
     return (value *= Math.round(Math.random()) ? 1 : -1);
   }
 
+  onPointerMove(event: MouseEvent) {
+    console.log(this.pointer);
+    this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  }
+
   animate() {
     window.requestAnimationFrame(this.animate.bind(this));
     this.render();
@@ -144,8 +168,15 @@ export default class SceneInit {
   }
 
   render() {
-    if (this.scene && this.camera)
-      this.renderer?.render(this.scene, this.camera);
+    this.raycaster.setFromCamera(this.pointer, this.camera);
+    // console.log(this.raycaster);
+
+    // const intersects = this.raycaster.intersectObjects(this.scene.children);
+    // for (let i = 0; i < intersects.length; i++) {
+    //   // console.log(intersects[i].object.material);
+    //   // intersects[i].object.material.color.set(0xffffff);
+    // }
+    this.renderer.render(this.scene, this.camera);
   }
 
   onWindowResize() {

@@ -4,18 +4,20 @@ import Stats from 'three/examples/jsm/libs/stats.module.js';
 
 export default class SceneInit {
   scene: THREE.Scene;
+  clock: THREE.Clock;
+  controls: OrbitControls;
   camera: THREE.PerspectiveCamera;
+  cameraSpeed: number;
+  time: number;
   renderer: THREE.WebGLRenderer;
   fov: number;
   nearPlane: number;
   farPlane: number;
   canvasId: string;
-  clock: object;
   stats: Stats;
-  controls: OrbitControls;
   ambientLight: THREE.AmbientLight;
   directionalLight: THREE.DirectionalLight;
-  testLight: THREE.PointLight;
+  // hemisphereLight: THREE.HemisphereLight;
   loader: THREE.TextureLoader;
   characterCount: number;
   characters: THREE.Mesh[];
@@ -27,26 +29,35 @@ export default class SceneInit {
     this.canvasId = canvasId;
 
     this.scene = new THREE.Scene();
+    this.clock = new THREE.Clock();
+    this.stats = new Stats();
+
     this.camera = new THREE.PerspectiveCamera(
       this.fov,
       window.innerWidth / window.innerHeight,
       1,
       1000
     );
+    this.cameraSpeed = 1;
+    this.clock.getDelta();
+    this.time = Number(this.clock.elapsedTime.toFixed(2));
 
     const canvas = document.getElementById(this.canvasId)!;
-    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    this.renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+    });
     this.loader = new THREE.TextureLoader();
 
     // Extra tools
-    this.clock = new THREE.Clock();
-    this.stats = new Stats();
+
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
     // Lighting
     this.ambientLight = new THREE.AmbientLight(0xffffff, 1);
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 5);
-    this.testLight = new THREE.PointLight(0xffffff, 100);
+    // this.hemisphereLight = new THREE.HemisphereLight(0xb1e1ff, 0xb97a20, 5);
 
     // Character Sprites
     this.characterCount = 100;
@@ -54,19 +65,35 @@ export default class SceneInit {
   }
 
   initialize() {
-    this.camera.position.set(0, 20, 40);
-
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer?.domElement);
-
     document.body.appendChild(this.stats.dom);
-    this.ambientLight.castShadow = true;
-    // this.directionalLight.castShadow = true;
-    this.directionalLight.position.set(5, 10, 5);
-    this.scene.add(this.directionalLight);
-    this.scene.add(this.testLight);
 
-    this.scene.background = new THREE.Color('#22223b');
+    // Camera
+    this.camera.position.set(0, 20, 40);
+
+    // Controls
+    this.controls.autoRotate = true;
+    this.controls.autoRotateSpeed = 1;
+    this.controls.minDistance = 30;
+    this.controls.maxDistance = 100;
+    // this.controls.enableRotate = false;
+
+    // console.log(this.camera);
+    // console.log(this.controls);
+
+    // Lighting
+    {
+      this.ambientLight.castShadow = true;
+      // this.directionalLight.castShadow = true;
+      this.ambientLight.position.set(5, 10, 5);
+      this.directionalLight.position.set(20, 100, 20);
+      this.scene.add(this.ambientLight);
+      this.scene.add(this.directionalLight);
+    }
+    // this.scene.add(this.testLight);
+
+    // this.scene.background = new THREE.Color('#22223b');
 
     // Plane
     {
@@ -125,7 +152,7 @@ export default class SceneInit {
   }
 
   randomPosition() {
-    let value = Math.random() * 20;
+    let value = Math.random() * 19;
     return (value *= Math.round(Math.random()) ? 1 : -1);
   }
 
@@ -134,6 +161,10 @@ export default class SceneInit {
     this.render();
     this.stats?.update();
     this.controls?.update();
+    // this.camera.position;
+    // const camera_offset = { x: 10, y: 10, z: 10 };
+    // this.camera.position.x *= Math.sin(this.time * this.cameraSpeed);
+    // this.camera.position.z *= Math.sin(this.time * this.cameraSpeed);
     this.characters.map((sprite) => {
       sprite.lookAt(this.camera.position);
     });

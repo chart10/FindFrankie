@@ -49,7 +49,7 @@ export default class SceneInit {
     this.testLight = new THREE.PointLight(0xffffff, 100);
 
     // Character Sprites
-    this.characterCount = 20;
+    this.characterCount = 100;
     this.characters = [];
   }
 
@@ -91,61 +91,42 @@ export default class SceneInit {
       this.scene.add(mesh);
     }
 
-    // // Cube
-    // {
-    //   const boxGeometry = new THREE.BoxGeometry(4, 4, 4);
-    //   const boxMaterial = new THREE.MeshPhongMaterial({ color: '#ffc300' });
-    //   const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-    //   boxMesh.position.set(4 + 1, 2, 0);
-    //   this.scene.add(boxMesh);
-    // }
+    // Create Civilian Characters
+    const civilianMat = new THREE.MeshPhongMaterial({
+      color: 0x9b5de5,
+      side: THREE.DoubleSide,
+    });
+    for (let i = 0; i < this.characterCount; i++) {
+      this.createCharacterSprite(civilianMat);
+    }
 
-    // // Sphere
-    // {
-    //   const sphereRadius = 3;
-    //   const sphereWidthDivisions = 32;
-    //   const sphereHeightDivisions = 16;
-    //   const sphereGeo = new THREE.SphereGeometry(
-    //     sphereRadius,
-    //     sphereWidthDivisions,
-    //     sphereHeightDivisions
-    //   );
-    //   const sphereMat = new THREE.MeshPhongMaterial({ color: '#00b4d8' });
-    //   const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
-    //   sphereMesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
-    //   this.scene.add(sphereMesh);
-    // }
-
-    // // Frankie Sprite
+    // Create Frankie Sprite
     {
-      const planeGeo = new THREE.PlaneGeometry(2, 4);
-      const planeMat = new THREE.MeshPhongMaterial({
+      const frankieMat = new THREE.MeshPhongMaterial({
         color: 0xff006e,
         side: THREE.DoubleSide,
       });
-      const characterMesh = new THREE.Mesh(planeGeo, planeMat);
-      characterMesh.position.set(0, 2, 0);
-      characterMesh.lookAt(this.camera.position);
-      this.scene.add(characterMesh);
-    }
-
-    // Fill Characters Array
-    for (let i = 0; i < this.characterCount; i++) {
-      const planeGeo = new THREE.PlaneGeometry(2, 4);
-      const planeMat = new THREE.MeshPhongMaterial({
-        color: 0x9b5de5,
-        side: THREE.DoubleSide,
-      });
-      const characterMesh = new THREE.Mesh(planeGeo, planeMat);
-      const xPosition = Math.random() * 10;
-      const zPosition = Math.random() * 10;
-      characterMesh.position.set(xPosition, 2, zPosition);
-      characterMesh.lookAt(this.camera.position);
-      this.scene.add(characterMesh);
-      this.characters.push(characterMesh);
+      this.createCharacterSprite(frankieMat);
     }
 
     window.addEventListener('resize', () => this.onWindowResize(), false);
+  }
+
+  createCharacterSprite(characterMat: THREE.MeshPhongMaterial) {
+    const planeGeo = new THREE.PlaneGeometry(2, 4);
+    const planeMat = characterMat;
+    const characterMesh = new THREE.Mesh(planeGeo, planeMat);
+    const xPosition = this.randomPosition();
+    const zPosition = this.randomPosition();
+    characterMesh.position.set(xPosition, 2, zPosition);
+    characterMesh.lookAt(this.camera.position);
+    this.scene.add(characterMesh);
+    this.characters.push(characterMesh);
+  }
+
+  randomPosition() {
+    let value = Math.random() * 20;
+    return (value *= Math.round(Math.random()) ? 1 : -1);
   }
 
   animate() {

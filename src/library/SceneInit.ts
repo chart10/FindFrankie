@@ -17,6 +17,8 @@ export default class SceneInit {
   directionalLight: THREE.DirectionalLight;
   testLight: THREE.PointLight;
   loader: THREE.TextureLoader;
+  characterCount: number;
+  characters: THREE.Mesh[];
 
   constructor(canvasId: string) {
     this.fov = 45;
@@ -36,8 +38,6 @@ export default class SceneInit {
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     this.loader = new THREE.TextureLoader();
 
-    // Camera params
-
     // Extra tools
     this.clock = new THREE.Clock();
     this.stats = new Stats();
@@ -47,6 +47,10 @@ export default class SceneInit {
     this.ambientLight = new THREE.AmbientLight(0xffffff, 1);
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 5);
     this.testLight = new THREE.PointLight(0xffffff, 100);
+
+    // Character Sprites
+    this.characterCount = 20;
+    this.characters = [];
   }
 
   initialize() {
@@ -62,55 +66,84 @@ export default class SceneInit {
     this.scene.add(this.directionalLight);
     this.scene.add(this.testLight);
 
-    const lionWallTexture = this.loader.load(
-      'https://threejs.org/manual/examples/resources/images/wall.jpg'
-    );
-    lionWallTexture.colorSpace = THREE.SRGBColorSpace;
-
     this.scene.background = new THREE.Color('#22223b');
 
     // Plane
-    const planeSize = 40;
-    const loader = new THREE.TextureLoader();
-    const texture = loader.load(
-      'https://threejs.org/manual/examples/resources/images/checker.png'
-    );
+    {
+      const planeSize = 40;
+      const loader = new THREE.TextureLoader();
+      const texture = loader.load(
+        'https://threejs.org/manual/examples/resources/images/checker.png'
+      );
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      texture.magFilter = THREE.NearestFilter;
+      texture.colorSpace = THREE.SRGBColorSpace;
+      const repeats = planeSize / 4;
+      texture.repeat.set(repeats, repeats);
+      const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
+      const planeMat = new THREE.MeshPhongMaterial({
+        map: texture,
+        side: THREE.DoubleSide,
+      });
+      const mesh = new THREE.Mesh(planeGeo, planeMat);
+      mesh.rotation.x = Math.PI * -0.5;
+      this.scene.add(mesh);
+    }
 
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    texture.magFilter = THREE.NearestFilter;
-    texture.colorSpace = THREE.SRGBColorSpace;
-    const repeats = planeSize / 2;
-    texture.repeat.set(repeats, repeats);
-    const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
-    const planeMat = new THREE.MeshPhongMaterial({
-      map: texture,
-      side: THREE.DoubleSide,
-    });
-    const mesh = new THREE.Mesh(planeGeo, planeMat);
-    mesh.rotation.x = Math.PI * -0.5;
-    this.scene.add(mesh);
+    // // Cube
+    // {
+    //   const boxGeometry = new THREE.BoxGeometry(4, 4, 4);
+    //   const boxMaterial = new THREE.MeshPhongMaterial({ color: '#ffc300' });
+    //   const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
+    //   boxMesh.position.set(4 + 1, 2, 0);
+    //   this.scene.add(boxMesh);
+    // }
 
-    // Cube
-    const boxGeometry = new THREE.BoxGeometry(4, 4, 4);
-    const boxMaterial = new THREE.MeshPhongMaterial({ color: '#ffc300' });
-    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-    boxMesh.position.set(4 + 1, 2, 0);
-    this.scene.add(boxMesh);
+    // // Sphere
+    // {
+    //   const sphereRadius = 3;
+    //   const sphereWidthDivisions = 32;
+    //   const sphereHeightDivisions = 16;
+    //   const sphereGeo = new THREE.SphereGeometry(
+    //     sphereRadius,
+    //     sphereWidthDivisions,
+    //     sphereHeightDivisions
+    //   );
+    //   const sphereMat = new THREE.MeshPhongMaterial({ color: '#00b4d8' });
+    //   const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
+    //   sphereMesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
+    //   this.scene.add(sphereMesh);
+    // }
 
-    // Sphere
-    const sphereRadius = 3;
-    const sphereWidthDivisions = 32;
-    const sphereHeightDivisions = 16;
-    const sphereGeo = new THREE.SphereGeometry(
-      sphereRadius,
-      sphereWidthDivisions,
-      sphereHeightDivisions
-    );
-    const sphereMat = new THREE.MeshPhongMaterial({ color: '#00b4d8' });
-    const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
-    sphereMesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
-    this.scene.add(sphereMesh);
+    // // Frankie Sprite
+    {
+      const planeGeo = new THREE.PlaneGeometry(2, 4);
+      const planeMat = new THREE.MeshPhongMaterial({
+        color: 0xff006e,
+        side: THREE.DoubleSide,
+      });
+      const characterMesh = new THREE.Mesh(planeGeo, planeMat);
+      characterMesh.position.set(0, 2, 0);
+      characterMesh.lookAt(this.camera.position);
+      this.scene.add(characterMesh);
+    }
+
+    // Fill Characters Array
+    for (let i = 0; i < this.characterCount; i++) {
+      const planeGeo = new THREE.PlaneGeometry(2, 4);
+      const planeMat = new THREE.MeshPhongMaterial({
+        color: 0x9b5de5,
+        side: THREE.DoubleSide,
+      });
+      const characterMesh = new THREE.Mesh(planeGeo, planeMat);
+      const xPosition = Math.random() * 10;
+      const zPosition = Math.random() * 10;
+      characterMesh.position.set(xPosition, 2, zPosition);
+      characterMesh.lookAt(this.camera.position);
+      this.scene.add(characterMesh);
+      this.characters.push(characterMesh);
+    }
 
     window.addEventListener('resize', () => this.onWindowResize(), false);
   }
@@ -120,6 +153,9 @@ export default class SceneInit {
     this.render();
     this.stats?.update();
     this.controls?.update();
+    this.characters.map((sprite) => {
+      sprite.lookAt(this.camera.position);
+    });
   }
 
   render() {
@@ -135,18 +171,3 @@ export default class SceneInit {
     this.renderer?.setSize(window.innerWidth, window.innerHeight);
   }
 }
-
-// class ColorGUIHelper {
-//   object: THREE.AmbientLight;
-//   prop: string;
-//   constructor(object: THREE.AmbientLight, prop: string) {
-//     this.object = object;
-//     this.prop = prop;
-//   }
-//   get value() {
-//     return `#${this.object[this.prop].getHexString()}`;
-//   }
-//   set value(hexString) {
-//     this.object[this.prop].set(hexString);
-//   }
-// }

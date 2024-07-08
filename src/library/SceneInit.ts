@@ -7,40 +7,27 @@ export default class SceneInit {
   clock: THREE.Clock;
   controls: OrbitControls;
   camera: THREE.PerspectiveCamera;
-  cameraSpeed: number;
-  time: number;
   renderer: THREE.WebGLRenderer;
-  fov: number;
-  nearPlane: number;
-  farPlane: number;
   canvasId: string;
   stats: Stats;
   ambientLight: THREE.AmbientLight;
   directionalLight: THREE.DirectionalLight;
-  // hemisphereLight: THREE.HemisphereLight;
   loader: THREE.TextureLoader;
   characterCount: number;
   characters: THREE.Mesh[];
 
   constructor(canvasId: string) {
-    this.fov = 45;
-    this.nearPlane = 0.1;
-    this.farPlane = 100;
     this.canvasId = canvasId;
-
     this.scene = new THREE.Scene();
     this.clock = new THREE.Clock();
     this.stats = new Stats();
 
     this.camera = new THREE.PerspectiveCamera(
-      this.fov,
+      45,
       window.innerWidth / window.innerHeight,
       1,
-      1000
+      200
     );
-    this.cameraSpeed = 1;
-    this.clock.getDelta();
-    this.time = Number(this.clock.elapsedTime.toFixed(2));
 
     const canvas = document.getElementById(this.canvasId)!;
     this.renderer = new THREE.WebGLRenderer({
@@ -49,17 +36,9 @@ export default class SceneInit {
       alpha: true,
     });
     this.loader = new THREE.TextureLoader();
-
-    // Extra tools
-
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-
-    // Lighting
     this.ambientLight = new THREE.AmbientLight(0xffffff, 1);
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 5);
-    // this.hemisphereLight = new THREE.HemisphereLight(0xb1e1ff, 0xb97a20, 5);
-
-    // Character Sprites
     this.characterCount = 100;
     this.characters = [];
   }
@@ -81,6 +60,7 @@ export default class SceneInit {
 
     // console.log(this.camera);
     // console.log(this.controls);
+    console.log(this.scene.children);
 
     // Lighting
     {
@@ -91,9 +71,6 @@ export default class SceneInit {
       this.scene.add(this.ambientLight);
       this.scene.add(this.directionalLight);
     }
-    // this.scene.add(this.testLight);
-
-    // this.scene.background = new THREE.Color('#22223b');
 
     // Plane
     {
@@ -118,7 +95,7 @@ export default class SceneInit {
       this.scene.add(mesh);
     }
 
-    // Create Civilian Characters
+    // Create Civilian Sprites
     const civilianMat = new THREE.MeshPhongMaterial({
       color: 0x9b5de5,
       side: THREE.DoubleSide,
@@ -161,10 +138,6 @@ export default class SceneInit {
     this.render();
     this.stats?.update();
     this.controls?.update();
-    // this.camera.position;
-    // const camera_offset = { x: 10, y: 10, z: 10 };
-    // this.camera.position.x *= Math.sin(this.time * this.cameraSpeed);
-    // this.camera.position.z *= Math.sin(this.time * this.cameraSpeed);
     this.characters.map((sprite) => {
       sprite.lookAt(this.camera.position);
     });

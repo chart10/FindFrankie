@@ -8,12 +8,6 @@ function App() {
     const test = new SceneInit('threeJsCanvas');
     test.initialize();
     test.animate();
-
-    // const boxGeometry = new THREE.BoxGeometry(16, 16, 16);
-    // const boxMaterial = new THREE.MeshNormalMaterial();
-    // const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-
-    // test.scene?.add(boxMesh);
   }, []);
 
   return (

@@ -64,9 +64,6 @@ export default class Character {
       ? (this.characterMesh.position.x += 0.01)
       : (this.characterMesh.position.x -= 0.01);
 
-    // this.characterMesh.position.x = this.calculatePerlinNoise(
-    //   this.characterMesh.position.x, this.posXVelocity
-    // );
     this.counter += this.simplexSpeed;
   }
 

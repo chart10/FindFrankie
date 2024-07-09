@@ -14,7 +14,20 @@ function App() {
     <>
       <canvas id='threeJsCanvas'></canvas>
       <div className='game-title'>
-        <h1>Find Frankie</h1>
+        <h1>
+          <span className='letter'>F</span>
+          <span className='letter'>i</span>
+          <span className='letter'>n</span>
+          <span className='letter'>d</span>
+          &nbsp;
+          <span className='letter'>F</span>
+          <span className='letter'>r</span>
+          <span className='letter'>a</span>
+          <span className='letter'>n</span>
+          <span className='letter'>k</span>
+          <span className='letter'>i</span>
+          <span className='letter'>e</span>
+        </h1>
       </div>
     </>
   );

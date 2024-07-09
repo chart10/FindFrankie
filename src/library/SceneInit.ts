@@ -19,6 +19,8 @@ export default class SceneInit {
   characters: Character[];
   raycaster: THREE.Raycaster;
   pointer: THREE.Vector2;
+  frankie: Character;
+  frankieFound: boolean;
 
   constructor(canvasId: string) {
     this.canvasId = canvasId;
@@ -50,7 +52,10 @@ export default class SceneInit {
       this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
       this.raycaster.setFromCamera(this.pointer, this.camera);
       const intersects = this.raycaster.intersectObjects(this.scene.children);
+      console.log(intersects);
+
       intersects[0].object.material.color.set(0xffffff);
+      // if (intersects[0].object == this.frankie) this.frankieFound = true;
     });
   }
 
@@ -112,14 +117,20 @@ export default class SceneInit {
     }
 
     // Create Characters
+    this.frankie = new Character(
+      this.scene,
+      this.camera,
+      0xff006e,
+      Math.random() / 2,
+      Math.random() * 0.01
+    );
+    this.characters.push(this.frankie);
     for (let i = 0; i < this.characterCount; i++) {
       const color =
         characterColors[Math.floor(Math.random() * characterColors.length)];
       const civilian = new Character(this.scene, this.camera, color);
       this.characters.push(civilian);
     }
-    const frankie = new Character(this.scene, this.camera, 0xff006e);
-    this.characters.push(frankie);
 
     window.addEventListener('resize', () => this.onWindowResize(), false);
   }
@@ -141,6 +152,7 @@ export default class SceneInit {
     this.stats?.update();
     this.controls?.update();
     this.characters.map((character) => {
+      character.animateCharacter();
       character.lookAt(this.camera.position);
     });
   }

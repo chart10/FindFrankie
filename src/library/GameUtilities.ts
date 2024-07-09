@@ -3,3 +3,5 @@ export const characterColors = [
 ];
 
 export const sceneBoundary = 19;
+
+export const characterSprites = ['ff_striped-red.png', 'ff_diagonal-blue.png'];

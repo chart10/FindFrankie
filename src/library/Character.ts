@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { SimplexNoise } from 'three/examples/jsm/Addons.js';
-import { sceneBoundary } from './GameUtilities';
+import { sceneBoundary, characterSprites } from './GameUtilities';
 
 export default class Character {
   simplex: SimplexNoise = new SimplexNoise();
@@ -33,7 +33,11 @@ export default class Character {
     if (frankie) {
       this.material = new THREE.MeshBasicMaterial({ color: 0xf72585 });
     } else {
-      const texture = loader.load('ff_striped-red.png');
+      const sprite =
+        characterSprites[Math.floor(Math.random() * characterSprites.length)];
+      console.log(sprite);
+
+      const texture = loader.load(sprite);
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.magFilter = THREE.NearestFilter;
       this.material = new THREE.MeshBasicMaterial({

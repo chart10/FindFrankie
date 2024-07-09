@@ -43,12 +43,12 @@ html {
   display: inline-block;
   background: #f15bb5;
 }
-/* .game-title:hover {
-  animation: shake 0.2s;
-} */
+
 .game-title h1 {
   margin: 0;
   font-size: 48px;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000,
+    1px -1px 0 #000;
 }
 
 .menu-window {

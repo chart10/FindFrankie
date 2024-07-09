@@ -52,7 +52,7 @@ export default class SceneInit {
       this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
       this.raycaster.setFromCamera(this.pointer, this.camera);
       const intersects = this.raycaster.intersectObjects(this.scene.children);
-      console.log(intersects);
+      console.log(intersects[0]);
 
       intersects[0].object.material.color.set(0xffffff);
       // if (intersects[0].object == this.frankie) this.frankieFound = true;
@@ -74,19 +74,14 @@ export default class SceneInit {
     this.controls.autoRotateSpeed = 1;
     this.controls.minDistance = 30;
     this.controls.maxDistance = 100;
-    this.controls.enableRotate = false;
+    this.controls.enableRotate = true;
 
-    // console.log(this.camera);
-    // console.log(this.controls);
     this.raycaster.setFromCamera(this.pointer, this.camera);
-
-    // console.log(this.scene.children);
-    // console.log(this.raycaster);
 
     // Lighting
     {
       this.ambientLight.castShadow = true;
-      // this.directionalLight.castShadow = true;
+      this.directionalLight.castShadow = true;
       this.ambientLight.position.set(5, 10, 5);
       this.directionalLight.position.set(20, 100, 20);
       this.scene.add(this.ambientLight);
@@ -120,17 +115,16 @@ export default class SceneInit {
     this.frankie = new Character(
       this.scene,
       this.camera,
-      0xff006e,
+      true,
       Math.random() / 2,
       Math.random() * 0.01
     );
     this.characters.push(this.frankie);
     for (let i = 0; i < this.characterCount; i++) {
-      const color =
-        characterColors[Math.floor(Math.random() * characterColors.length)];
-      const civilian = new Character(this.scene, this.camera, color);
+      const civilian = new Character(this.scene, this.camera, false);
       this.characters.push(civilian);
     }
+    console.log(this.characters[0]);
 
     window.addEventListener('resize', () => this.onWindowResize(), false);
   }

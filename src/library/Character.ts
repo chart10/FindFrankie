@@ -9,7 +9,7 @@ export default class Character {
   counter: number;
   posXVelocity: boolean;
   posZVelocity: boolean;
-  material: THREE.MeshPhongMaterial;
+  material: THREE.MeshBasicMaterial;
   geometry: THREE.PlaneGeometry;
   characterMesh: THREE.Mesh;
   camera: THREE.Camera;
@@ -18,7 +18,7 @@ export default class Character {
   constructor(
     scene: THREE.Scene,
     camera: THREE.Camera,
-    color: number,
+    frankie: boolean,
     noiseOffset: number = 0,
     simplexSpeed: number = 0.005
   ) {
@@ -28,11 +28,21 @@ export default class Character {
     this.posZVelocity = true;
     this.scene = scene;
     this.camera = camera;
+    const loader = new THREE.TextureLoader();
+
+    if (frankie) {
+      this.material = new THREE.MeshBasicMaterial({ color: 0xf72585 });
+    } else {
+      const texture = loader.load('ff_striped-red.png');
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.magFilter = THREE.NearestFilter;
+      this.material = new THREE.MeshBasicMaterial({
+        map: texture,
+        alphaTest: 0.5,
+      });
+    }
     this.geometry = new THREE.PlaneGeometry(2, 4);
-    this.material = new THREE.MeshPhongMaterial({
-      color: color,
-      side: THREE.DoubleSide,
-    });
+
     this.characterMesh = new THREE.Mesh(this.geometry, this.material);
     this.characterMesh.position.set(
       this.randomPosition(),

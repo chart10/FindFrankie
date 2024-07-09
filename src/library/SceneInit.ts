@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
+import Character from './Character';
+import { characterColors } from './GameUtilities';
 
 export default class SceneInit {
   scene: THREE.Scene;
@@ -14,7 +16,7 @@ export default class SceneInit {
   directionalLight: THREE.DirectionalLight;
   loader: THREE.TextureLoader;
   characterCount: number;
-  characters: THREE.Mesh[];
+  characters: Character[];
   raycaster: THREE.Raycaster;
   pointer: THREE.Vector2;
 
@@ -46,12 +48,8 @@ export default class SceneInit {
     document.addEventListener('click', (event) => {
       this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
       this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-      console.log(this.pointer);
-
       this.raycaster.setFromCamera(this.pointer, this.camera);
-      console.log(this.raycaster.ray.direction);
       const intersects = this.raycaster.intersectObjects(this.scene.children);
-      console.log(intersects);
       intersects[0].object.material.color.set(0xffffff);
     });
   }
@@ -113,39 +111,17 @@ export default class SceneInit {
       this.scene.add(mesh);
     }
 
-    // Create Civilian Sprites
-    // const civilianMat = ;
+    // Create Characters
     for (let i = 0; i < this.characterCount; i++) {
-      this.createCharacterSprite(
-        new THREE.MeshPhongMaterial({
-          color: 0x9b5de5,
-          side: THREE.DoubleSide,
-        })
-      );
+      const color =
+        characterColors[Math.floor(Math.random() * characterColors.length)];
+      const civilian = new Character(this.scene, this.camera, color);
+      this.characters.push(civilian);
     }
-
-    // Create Frankie Sprite
-    {
-      const frankieMat = new THREE.MeshPhongMaterial({
-        color: 0xff006e,
-        side: THREE.DoubleSide,
-      });
-      this.createCharacterSprite(frankieMat);
-    }
+    const frankie = new Character(this.scene, this.camera, 0xff006e);
+    this.characters.push(frankie);
 
     window.addEventListener('resize', () => this.onWindowResize(), false);
-  }
-
-  createCharacterSprite(characterMat: THREE.MeshPhongMaterial) {
-    const planeGeo = new THREE.PlaneGeometry(2, 4);
-    const planeMat = characterMat;
-    const characterMesh = new THREE.Mesh(planeGeo, planeMat);
-    const xPosition = this.randomPosition();
-    const zPosition = this.randomPosition();
-    characterMesh.position.set(xPosition, 2, zPosition);
-    characterMesh.lookAt(this.camera.position);
-    this.scene.add(characterMesh);
-    this.characters.push(characterMesh);
   }
 
   randomPosition() {
@@ -164,8 +140,8 @@ export default class SceneInit {
     this.render();
     this.stats?.update();
     this.controls?.update();
-    this.characters.map((sprite) => {
-      sprite.lookAt(this.camera.position);
+    this.characters.map((character) => {
+      character.lookAt(this.camera.position);
     });
   }
 

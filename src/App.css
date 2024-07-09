@@ -19,4 +19,15 @@ html {
   display: block;
   background: url('./assets/spaceBackground.jpg');
   background-size: cover;
+  z-index: -1;
+}
+
+.game-title {
+  border: 2px solid black;
+  padding: 20px;
+  display: inline-block;
+  background: #f15bb5;
+}
+
+.menu-window {
 }

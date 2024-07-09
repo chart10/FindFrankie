@@ -169,13 +169,6 @@ export default class SceneInit {
 
   render() {
     this.raycaster.setFromCamera(this.pointer, this.camera);
-    // console.log(this.raycaster);
-
-    // const intersects = this.raycaster.intersectObjects(this.scene.children);
-    // for (let i = 0; i < intersects.length; i++) {
-    //   // console.log(intersects[i].object.material);
-    //   // intersects[i].object.material.color.set(0xffffff);
-    // }
     this.renderer.render(this.scene, this.camera);
   }
 

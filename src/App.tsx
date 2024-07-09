@@ -13,6 +13,9 @@ function App() {
   return (
     <>
       <canvas id='threeJsCanvas'></canvas>
+      <div className='game-title'>
+        <h1>Find Frankie</h1>
+      </div>
     </>
   );
 }

@@ -57,6 +57,8 @@ export default class SceneInit {
   }
 
   initialize() {
+    this.scene.background = new THREE.Color(0xfee440);
+
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer?.domElement);
     document.body.appendChild(this.stats.dom);

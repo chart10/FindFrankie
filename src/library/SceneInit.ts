@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import Character from './Character';
+import { characterCount, frankieSprite } from './GameUtilities';
+
 export default class SceneInit {
   scene: THREE.Scene;
   clock: THREE.Clock;
@@ -41,7 +43,7 @@ export default class SceneInit {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.ambientLight = new THREE.AmbientLight(0xffffff, 1);
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 5);
-    this.characterCount = 25;
+    this.characterCount = characterCount;
     this.characters = [];
 
     this.frankieFound = false;
@@ -55,12 +57,12 @@ export default class SceneInit {
         this.scene.children,
         false
       );
-      let frankieMesh = this.frankie.material;
+      const frankieMesh = this.frankie.material;
       frankieMesh.map.needsUpdate = true;
       const intersectedMesh = intersects[0].object.material;
       if (intersectedMesh == frankieMesh) {
         this.frankieFound = true;
-        const texture = this.loader.load('ff-polka_green-cheer2.png');
+        const texture = this.loader.load(frankieSprite);
         texture.colorSpace = THREE.SRGBColorSpace;
         texture.magFilter = THREE.NearestFilter;
         intersects[0].object.material.map = texture;
@@ -104,11 +106,17 @@ export default class SceneInit {
     this.camera.position.set(0, 20, 40);
 
     // Controls
-    this.controls.autoRotate = true;
-    this.controls.autoRotateSpeed = 1;
-    // this.controls.minDistance = 30;
-    // this.controls.maxDistance = 100;
-    this.controls.enableRotate = true;
+    {
+      this.controls.autoRotate = true;
+      this.controls.autoRotateSpeed = 1;
+      this.controls.minDistance = 30;
+      this.controls.maxDistance = 100;
+      // this.controls.minPolarAngle = 0.2 * Math.PI;
+      // this.controls.maxPolarAngle = 0.5 * Math.PI;
+      this.controls.enableRotate = true;
+      this.controls.enablePan = false;
+      this.controls.enableDamping = true;
+    }
 
     this.raycaster.setFromCamera(this.pointer, this.camera);
 

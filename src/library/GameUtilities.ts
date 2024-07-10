@@ -4,4 +4,8 @@ export const characterColors = [
 
 export const sceneBoundary = 19;
 
+export const characterCount = 500;
+
 export const characterSprites = ['ff-wavy_red.png', 'ff-diagonal_blue.png'];
+
+export const frankieSprite = 'ff-polka_green-cheer2.png';

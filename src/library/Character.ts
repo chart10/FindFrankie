@@ -31,7 +31,7 @@ export default class Character {
     const loader = new THREE.TextureLoader();
 
     if (frankie) {
-      const texture = loader.load('ff_dot-green.png');
+      const texture = loader.load('ff-polka_green.png');
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.magFilter = THREE.NearestFilter;
       this.material = new THREE.MeshBasicMaterial({

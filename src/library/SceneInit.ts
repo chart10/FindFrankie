@@ -2,7 +2,6 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import Character from './Character';
-import { log } from 'three/examples/jsm/nodes/Nodes.js';
 export default class SceneInit {
   scene: THREE.Scene;
   clock: THREE.Clock;
@@ -61,16 +60,16 @@ export default class SceneInit {
       const intersectedMesh = intersects[0].object.material;
       if (intersectedMesh == frankieMesh) {
         this.frankieFound = true;
-        const texture = this.loader.load('ff-polka_green-cheer.png');
+        const texture = this.loader.load('ff-polka_green-cheer2.png');
         texture.colorSpace = THREE.SRGBColorSpace;
         texture.magFilter = THREE.NearestFilter;
         intersects[0].object.material.map = texture;
+      } else {
+        intersects[0].object.material.color.set(0xf72585);
+        setTimeout(() => {
+          intersects[0].object.material.color.set(0xffffff);
+        }, 1000);
       }
-      intersects[0].object.material.color.set(0xf72585);
-      setTimeout(() => {
-        intersects[0].object.material.color.set(0xffffff);
-      }, 1000);
-      console.log(intersects[0].object.material);
 
       console.log('Did you click Frankie? ' + this.frankieFound);
     });

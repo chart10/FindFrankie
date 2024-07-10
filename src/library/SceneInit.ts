@@ -2,8 +2,6 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import Character from './Character';
-import { characterColors } from './GameUtilities';
-
 export default class SceneInit {
   scene: THREE.Scene;
   clock: THREE.Clock;
@@ -19,8 +17,8 @@ export default class SceneInit {
   characters: Character[];
   raycaster: THREE.Raycaster;
   pointer: THREE.Vector2;
-  frankie: Character;
-  frankieFound: boolean;
+  // frankie: Character;
+  // frankieFound: boolean;
 
   constructor(canvasId: string) {
     this.canvasId = canvasId;
@@ -43,7 +41,7 @@ export default class SceneInit {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.ambientLight = new THREE.AmbientLight(0xffffff, 1);
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 5);
-    this.characterCount = 100;
+    this.characterCount = 500;
     this.characters = [];
     this.raycaster = new THREE.Raycaster();
     this.pointer = new THREE.Vector2();
@@ -52,9 +50,10 @@ export default class SceneInit {
       this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
       this.raycaster.setFromCamera(this.pointer, this.camera);
       const intersects = this.raycaster.intersectObjects(this.scene.children);
-      console.log(intersects[0]);
-
-      intersects[0].object.material.color.set(0xffffff);
+      // intersects[0].object.material.color.set(0xffffff);
+      intersects[0].object.material.update(
+        new THREE.MeshBasicMaterial({ color: 0xffffff })
+      );
       // if (intersects[0].object == this.frankie) this.frankieFound = true;
     });
   }
@@ -124,14 +123,8 @@ export default class SceneInit {
       const civilian = new Character(this.scene, this.camera, false);
       this.characters.push(civilian);
     }
-    console.log(this.characters[0]);
 
     window.addEventListener('resize', () => this.onWindowResize(), false);
-  }
-
-  randomPosition() {
-    let value = Math.random() * 19;
-    return (value *= Math.round(Math.random()) ? 1 : -1);
   }
 
   onPointerMove(event: MouseEvent) {

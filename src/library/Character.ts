@@ -31,12 +31,16 @@ export default class Character {
     const loader = new THREE.TextureLoader();
 
     if (frankie) {
-      this.material = new THREE.MeshBasicMaterial({ color: 0xf72585 });
+      const texture = loader.load('ff_dot-green.png');
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.magFilter = THREE.NearestFilter;
+      this.material = new THREE.MeshBasicMaterial({
+        map: texture,
+        alphaTest: 0.5,
+      });
     } else {
       const sprite =
         characterSprites[Math.floor(Math.random() * characterSprites.length)];
-      console.log(sprite);
-
       const texture = loader.load(sprite);
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.magFilter = THREE.NearestFilter;

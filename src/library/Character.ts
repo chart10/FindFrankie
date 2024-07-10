@@ -78,6 +78,10 @@ export default class Character {
       this.characterMesh.position.z,
       this.posZVelocity
     );
+    // this.characterMesh.position.x = this.calculatePerlinNoise(
+    //   this.characterMesh.position.x,
+    //   this.posXVelocity
+    // );
     this.posXVelocity
       ? (this.characterMesh.position.x += 0.01)
       : (this.characterMesh.position.x -= 0.01);

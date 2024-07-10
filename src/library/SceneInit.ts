@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import Character from './Character';
+import { log } from 'three/examples/jsm/nodes/Nodes.js';
 export default class SceneInit {
   scene: THREE.Scene;
   clock: THREE.Clock;
@@ -55,14 +56,23 @@ export default class SceneInit {
         this.scene.children,
         false
       );
-      const frankieMesh = this.frankie.material;
+      let frankieMesh = this.frankie.material;
+      frankieMesh.map.needsUpdate = true;
       const intersectedMesh = intersects[0].object.material;
-      if (intersectedMesh == frankieMesh) this.frankieFound = true;
+      if (intersectedMesh == frankieMesh) {
+        this.frankieFound = true;
+        const texture = this.loader.load('ff-polka_green-cheer.png');
+        texture.colorSpace = THREE.SRGBColorSpace;
+        texture.magFilter = THREE.NearestFilter;
+        intersects[0].object.material.map = texture;
+      }
       intersects[0].object.material.color.set(0xf72585);
       setTimeout(() => {
         intersects[0].object.material.color.set(0xffffff);
       }, 1000);
-      console.log(this.frankieFound);
+      console.log(intersects[0].object.material);
+
+      console.log('Did you click Frankie? ' + this.frankieFound);
     });
   }
 
@@ -97,8 +107,8 @@ export default class SceneInit {
     // Controls
     this.controls.autoRotate = true;
     this.controls.autoRotateSpeed = 1;
-    this.controls.minDistance = 30;
-    this.controls.maxDistance = 100;
+    // this.controls.minDistance = 30;
+    // this.controls.maxDistance = 100;
     this.controls.enableRotate = true;
 
     this.raycaster.setFromCamera(this.pointer, this.camera);
@@ -163,6 +173,9 @@ export default class SceneInit {
     this.render();
     this.stats?.update();
     this.controls?.update();
+    if (this.frankieFound) {
+      this.frankie.characterMesh.position.y = 7;
+    }
     this.characters.map((character) => {
       character.animateCharacter();
       character.lookAt(this.camera.position);

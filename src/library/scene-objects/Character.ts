@@ -1,10 +1,11 @@
 import * as THREE from 'three';
-// import { SimplexNoise } from 'three/examples/jsm/Addons.js';
+import { SimplexNoise } from 'three/examples/jsm/Addons.js';
 import { sceneBoundary } from '../GameUtilities';
 
 export class Character {
   mesh: THREE.Mesh;
   loader: THREE.TextureLoader;
+  simplexNoise: SimplexNoise = new SimplexNoise();
   movementCounter: number;
   simplexSpeed: number;
   simplexOffset: number;
@@ -56,7 +57,45 @@ export class Character {
   }
 
   animateCharacter(cameraPosition: THREE.Vector3) {
+    if (
+      this.mesh.position.z > sceneBoundary ||
+      this.mesh.position.z < -sceneBoundary
+    )
+      this.positiveZVelocity = !this.positiveZVelocity;
+    if (
+      this.mesh.position.x > sceneBoundary ||
+      this.mesh.position.x < -sceneBoundary
+    )
+      this.positiveXVelocity = !this.positiveXVelocity;
+
+    this.mesh.position.z = this.calculatePerlinNoise(
+      this.mesh.position.z,
+      this.positiveZVelocity
+    );
+    this.positiveXVelocity
+      ? (this.mesh.position.x += 0.02)
+      : (this.mesh.position.x -= 0.02);
+
+    this.movementCounter += this.simplexSpeed;
+
     this.mesh.lookAt(cameraPosition);
+  }
+
+  calculatePerlinNoise(value: number, posVelocity: boolean) {
+    if (posVelocity) {
+      value +=
+        this.simplexNoise.noise(
+          this.movementCounter + this.simplexOffset,
+          this.movementCounter + this.simplexOffset
+        ) * 0.05;
+    } else {
+      value -=
+        this.simplexNoise.noise(
+          this.movementCounter + this.simplexOffset,
+          this.movementCounter + this.simplexOffset
+        ) * 0.05;
+    }
+    return value;
   }
 
   getTest() {

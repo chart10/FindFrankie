@@ -19,6 +19,7 @@ export default class GameManager {
 
   characterCount: number;
   characterCrowdObject: THREE.Object3D;
+  frankieObject: THREE.Object3D;
   characterCrowd: Character[];
 
   constructor(canvas: HTMLElement) {
@@ -45,7 +46,9 @@ export default class GameManager {
     this.characterCount = 50;
     this.characterCrowd = [];
     this.characterCrowdObject = new THREE.Object3D();
+    this.frankieObject = new THREE.Object3D();
     this.scene.add(this.characterCrowdObject);
+    this.scene.add(this.frankieObject);
   }
 
   initialize() {
@@ -63,16 +66,16 @@ export default class GameManager {
     this.scene.add(ground.mesh);
 
     for (let i = 0; i < this.characterCount; i++) {
-      this.initializeCharacter(characterSprites);
+      this.initializeCharacter(characterSprites, this.characterCrowdObject);
     }
-    this.initializeCharacter(frankieSprite);
+    this.initializeCharacter(frankieSprite, this.frankieObject);
   }
 
-  initializeCharacter(characterSprites: string[]) {
+  initializeCharacter(characterSprites: string[], sceneObject: THREE.Object3D) {
     const character = new Character(characterSprites);
     character.setRandomPosition();
     this.characterCrowd.push(character);
-    this.characterCrowdObject.add(character.mesh);
+    sceneObject.add(character.mesh);
     return character;
   }
 

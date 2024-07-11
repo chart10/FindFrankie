@@ -6,6 +6,7 @@ import Light from './scene-utilities/Light';
 import Ground from './scene-objects/Ground';
 import { Character } from './scene-objects/Character';
 import { characterSprites, frankieSprite } from './GameUtilities';
+import Raycaster from './scene-utilities/Raycaster';
 
 export default class GameManager {
   // Scene Elements
@@ -16,6 +17,7 @@ export default class GameManager {
   cameraControls: CameraControls;
   directionalLight: Light;
   ambientLight: Light;
+  raycaster: Raycaster;
 
   characterCount: number;
   characterCrowdObject: THREE.Object3D;
@@ -40,10 +42,12 @@ export default class GameManager {
       this.mainCamera.camera,
       this.renderer
     );
+    this.raycaster = new Raycaster(this.scene, this.mainCamera.camera);
+
     this.directionalLight = new Light('directionalLight', 0xfffff, 5);
     this.ambientLight = new Light('ambientLight', 0xfffff, 1);
 
-    this.characterCount = 50;
+    this.characterCount = 300;
     this.characterCrowd = [];
     this.characterCrowdObject = new THREE.Object3D();
     this.frankieObject = new THREE.Object3D();
@@ -55,6 +59,11 @@ export default class GameManager {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer.domElement);
     document.body.appendChild(this.stats.dom);
+    document.addEventListener(
+      'click',
+      this.raycaster.onClickGame.bind(this.raycaster),
+      false
+    );
     window.addEventListener('resize', () => this.onWindowResize(), false);
 
     this.scene.background = new THREE.Color(0xfee440);

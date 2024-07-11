@@ -11,7 +11,6 @@ export class Character {
   simplexOffset: number;
   positiveXVelocity: boolean;
   positiveZVelocity: boolean;
-  test: string;
 
   constructor(
     characterSprites: string[],
@@ -25,7 +24,6 @@ export class Character {
     this.positiveZVelocity = true;
     this.loader = new THREE.TextureLoader();
     this.mesh = this.buildCharacterMesh(characterSprites);
-    this.test = 'regular civilian';
   }
 
   buildCharacterMesh(characterSprites: string[]) {
@@ -96,9 +94,5 @@ export class Character {
         ) * 0.05;
     }
     return value;
-  }
-
-  getTest() {
-    console.log(this.test);
   }
 }

@@ -2,6 +2,7 @@ import * as THREE from 'three';
 
 export default class Light {
   light: THREE.DirectionalLight | THREE.AmbientLight;
+
   constructor(
     lightType: 'directionalLight' | 'ambientLight',
     color: number,

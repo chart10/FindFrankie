@@ -22,6 +22,5 @@ export default class Ground {
     });
     this.mesh = new THREE.Mesh(geometry, material);
     this.mesh.rotation.x = Math.PI * -0.5;
-    console.log(this.mesh);
   }
 }

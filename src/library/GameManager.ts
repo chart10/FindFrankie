@@ -1,9 +1,11 @@
 import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
-import PerspectiveCamera from './PerspectiveCamera';
-import CameraControls from './CameraControls';
-import Light from './Light';
-import Ground from './Ground';
+import PerspectiveCamera from './scene-utilities/PerspectiveCamera';
+import CameraControls from './scene-utilities/CameraControls';
+import Light from './scene-utilities/Light';
+import Ground from './scene-objects/Ground';
+import { Character } from './scene-objects/Character';
+import { characterSprites, frankieSprite } from './GameUtilities';
 
 export default class GameManager {
   // Scene Elements
@@ -14,6 +16,10 @@ export default class GameManager {
   cameraControls: CameraControls;
   directionalLight: Light;
   ambientLight: Light;
+
+  characterCount: number;
+  characterCrowdObject: THREE.Object3D;
+  characterCrowd: Character[];
 
   constructor(canvas: HTMLElement) {
     this.scene = new THREE.Scene();
@@ -34,8 +40,12 @@ export default class GameManager {
       this.renderer
     );
     this.directionalLight = new Light('directionalLight', 0xfffff, 5);
-
     this.ambientLight = new Light('ambientLight', 0xfffff, 1);
+
+    this.characterCount = 50;
+    this.characterCrowd = [];
+    this.characterCrowdObject = new THREE.Object3D();
+    this.scene.add(this.characterCrowdObject);
   }
 
   initialize() {
@@ -45,11 +55,25 @@ export default class GameManager {
     window.addEventListener('resize', () => this.onWindowResize(), false);
 
     this.scene.background = new THREE.Color(0xfee440);
+    this.mainCamera.setPosition(0, 20, 40);
     this.directionalLight.setPosition(20, 100, 20);
     this.ambientLight.setPosition(5, 10, 5);
 
     const ground = new Ground(40);
     this.scene.add(ground.mesh);
+
+    for (let i = 0; i < this.characterCount; i++) {
+      this.initializeCharacter(characterSprites);
+    }
+    this.initializeCharacter(frankieSprite);
+  }
+
+  initializeCharacter(characterSprites: string[]) {
+    const character = new Character(characterSprites);
+    character.setRandomPosition();
+    this.characterCrowd.push(character);
+    this.characterCrowdObject.add(character.mesh);
+    return character;
   }
 
   animate() {
@@ -57,6 +81,10 @@ export default class GameManager {
     this.render();
     this.stats?.update();
     this.cameraControls.controls.update();
+
+    this.characterCrowd.map((character) => {
+      character.animateCharacter(this.mainCamera.camera.position);
+    });
   }
 
   render() {

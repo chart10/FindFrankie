@@ -2,10 +2,11 @@ import * as THREE from 'three';
 
 export default class Ground {
   mesh: THREE.Mesh;
+  loader: THREE.TextureLoader;
 
   constructor(size: number) {
-    const loader = new THREE.TextureLoader();
-    const groundTexture = loader.load(
+    this.loader = new THREE.TextureLoader();
+    const groundTexture = this.loader.load(
       'https://threejs.org/manual/examples/resources/images/checker.png'
     );
     groundTexture.wrapS = THREE.RepeatWrapping;
@@ -15,11 +16,12 @@ export default class Ground {
     const repeats = size / 4;
     groundTexture.repeat.set(repeats, repeats);
     const geometry = new THREE.PlaneGeometry(size, size);
-    const material = new THREE.MeshPhongMaterial({
+    const material = new THREE.MeshBasicMaterial({
       map: groundTexture,
       side: THREE.DoubleSide,
     });
     this.mesh = new THREE.Mesh(geometry, material);
     this.mesh.rotation.x = Math.PI * -0.5;
+    console.log(this.mesh);
   }
 }

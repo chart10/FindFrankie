@@ -3,6 +3,7 @@ import Stats from 'three/examples/jsm/libs/stats.module.js';
 import PerspectiveCamera from './PerspectiveCamera';
 import CameraControls from './CameraControls';
 import Light from './Light';
+import Ground from './Ground';
 
 export default class GameManager {
   // Scene Elements
@@ -46,6 +47,9 @@ export default class GameManager {
     this.scene.background = new THREE.Color(0xfee440);
     this.directionalLight.setPosition(20, 100, 20);
     this.ambientLight.setPosition(5, 10, 5);
+
+    const ground = new Ground(40);
+    this.scene.add(ground.mesh);
   }
 
   animate() {

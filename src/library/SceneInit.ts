@@ -49,51 +49,36 @@ export default class SceneInit {
     this.frankieFound = false;
     this.raycaster = new THREE.Raycaster();
     this.pointer = new THREE.Vector2();
-    document.addEventListener('click', (event) => {
-      this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-      this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-      this.raycaster.setFromCamera(this.pointer, this.camera);
-      const intersects = this.raycaster.intersectObjects(
-        this.scene.children,
-        false
-      );
-      const frankieMesh = this.frankie.material;
-      frankieMesh.map.needsUpdate = true;
-      const intersectedMesh = intersects[0].object.material;
-      if (intersectedMesh == frankieMesh) {
-        this.frankieFound = true;
-        const texture = this.loader.load(frankieSprite);
-        texture.colorSpace = THREE.SRGBColorSpace;
-        texture.magFilter = THREE.NearestFilter;
-        intersects[0].object.material.map = texture;
-      } else {
-        intersects[0].object.material.color.set(0xf72585);
-        setTimeout(() => {
-          intersects[0].object.material.color.set(0xffffff);
-        }, 1000);
-      }
-
-      console.log('Did you click Frankie? ' + this.frankieFound);
-    });
+    document.addEventListener('click', this.clickOnMesh.bind(this));
   }
 
-  // clickOnMesh(event: MouseEvent) {
-  //   this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-  //   this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  //   this.raycaster.setFromCamera(this.pointer, this.camera);
-  //   const intersects = this.raycaster.intersectObjects(
-  //     this.scene.children,
-  //     false
-  //   );
-  //   const frankieMesh = this.frankie.material;
-  //   const intersectedMesh = intersects[0].object.material;
-  //   if (intersectedMesh == frankieMesh) this.frankieFound = true;
-  //   intersects[0].object.material.color.set(0xf72585);
-  //   setTimeout(() => {
-  //     intersects[0].object.material.color.set(0xffffff);
-  //   }, 1000);
-  //   console.log(this.frankieFound);
-  // }
+  clickOnMesh(event: MouseEvent) {
+    this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    this.raycaster.setFromCamera(this.pointer, this.camera);
+    const intersects = this.raycaster.intersectObjects(
+      this.scene.children,
+      false
+    );
+    const frankieMesh = this.frankie.material;
+    frankieMesh.map.needsUpdate = true;
+    const intersectedMesh = intersects[0].object;
+    if (intersectedMesh == this.frankie.characterMesh) {
+      this.frankieFound = true;
+      const texture = this.loader.load(frankieSprite);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.magFilter = THREE.NearestFilter;
+      intersects[0].object.material.map = texture;
+    } else {
+      intersects[0].object.material.color.set(0xf72585);
+      setTimeout(() => {
+        intersects[0].object.material.color.set(0xffffff);
+      }, 1000);
+    }
+
+    console.log('Did you click Frankie? ' + this.frankieFound);
+    console.log(this.frankieFound);
+  }
 
   initialize() {
     this.scene.background = new THREE.Color(0xfee440);
@@ -111,8 +96,8 @@ export default class SceneInit {
       this.controls.autoRotateSpeed = 1;
       this.controls.minDistance = 30;
       this.controls.maxDistance = 100;
-      // this.controls.minPolarAngle = 0.2 * Math.PI;
-      // this.controls.maxPolarAngle = 0.5 * Math.PI;
+      this.controls.minPolarAngle = 0.2 * Math.PI;
+      this.controls.maxPolarAngle = 0.5 * Math.PI;
       this.controls.enableRotate = true;
       this.controls.enablePan = false;
       this.controls.enableDamping = true;

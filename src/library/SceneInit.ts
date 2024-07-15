@@ -56,10 +56,13 @@ export default class SceneInit {
     this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
     this.raycaster.setFromCamera(this.pointer, this.camera);
+    console.log(this.scene.children);
+
     const intersects = this.raycaster.intersectObjects(
       this.scene.children,
       false
     );
+    console.log(intersects);
     const frankieMesh = this.frankie.material;
     frankieMesh.map.needsUpdate = true;
     const intersectedMesh = intersects[0].object;

@@ -19,6 +19,7 @@ export default class GameManager {
   ambientLight: Light;
   raycaster: Raycaster;
 
+  // Character Objects
   characterCount: number;
   characterCrowdObject: THREE.Object3D;
   frankieObject: THREE.Object3D;
@@ -60,7 +61,7 @@ export default class GameManager {
     document.body.appendChild(this.renderer.domElement);
     document.body.appendChild(this.stats.dom);
     document.addEventListener(
-      'click',
+      'mousedown',
       this.raycaster.onClickGame.bind(this.raycaster),
       false
     );

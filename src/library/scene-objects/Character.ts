@@ -13,6 +13,7 @@ export class Character {
   positiveZVelocity: boolean;
 
   constructor(
+    name: string,
     characterSprites: string[],
     simplexSpeed: number = 0.005,
     simplexOffset: number = 0
@@ -23,10 +24,10 @@ export class Character {
     this.positiveXVelocity = Math.random() > 0.5;
     this.positiveZVelocity = true;
     this.loader = new THREE.TextureLoader();
-    this.mesh = this.buildCharacterMesh(characterSprites);
+    this.mesh = this.buildCharacterMesh(name, characterSprites);
   }
 
-  buildCharacterMesh(characterSprites: string[]) {
+  buildCharacterMesh(name: string, characterSprites: string[]) {
     const sprite =
       characterSprites[Math.floor(Math.random() * characterSprites.length)];
     const texture = this.loader.load(sprite);
@@ -38,6 +39,7 @@ export class Character {
     });
     const geometry = new THREE.PlaneGeometry(2, 4);
     this.mesh = new THREE.Mesh(geometry, material);
+    this.mesh.name = name;
     return this.mesh;
   }
 

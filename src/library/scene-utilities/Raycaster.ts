@@ -22,10 +22,12 @@ export default class Raycaster {
       true
     );
 
-    const selectedObject = intersections[0];
-    selectedObject.object.material.color.set(0xf72585);
+    const selectedObject = intersections[0].object;
+    console.log(selectedObject.name);
+
+    selectedObject.material.color.set(0xf72585);
     setTimeout(() => {
-      selectedObject.object.material.color.set(0xffffff);
+      selectedObject.material.color.set(0xffffff);
     }, 1000);
     // }
   }

@@ -76,13 +76,22 @@ export default class GameManager {
     this.scene.add(ground.mesh);
 
     for (let i = 0; i < this.characterCount; i++) {
-      this.initializeCharacter(characterSprites, this.characterCrowdObject);
+      const characterName = 'Civilian ' + i;
+      this.initializeCharacter(
+        characterName,
+        characterSprites,
+        this.characterCrowdObject
+      );
     }
-    this.initializeCharacter(frankieSprite, this.frankieObject);
+    this.initializeCharacter('Frankie', frankieSprite, this.frankieObject);
   }
 
-  initializeCharacter(characterSprites: string[], sceneObject: THREE.Object3D) {
-    const character = new Character(characterSprites);
+  initializeCharacter(
+    name: string,
+    characterSprites: string[],
+    sceneObject: THREE.Object3D
+  ) {
+    const character = new Character(name, characterSprites);
     character.setRandomPosition();
     this.characterCrowd.push(character);
     sceneObject.add(character.mesh);

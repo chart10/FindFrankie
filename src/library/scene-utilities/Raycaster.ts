@@ -3,11 +3,13 @@ export default class Raycaster {
   raycaster: THREE.Raycaster;
   scene: THREE.Scene;
   camera: THREE.Camera;
+  loader: THREE.TextureLoader;
 
   constructor(scene: THREE.Scene, camera: THREE.Camera) {
     this.scene = scene;
     this.camera = camera;
     this.raycaster = new THREE.Raycaster();
+    this.loader = new THREE.TextureLoader();
   }
 
   onClickGame(event: MouseEvent) {
@@ -21,14 +23,27 @@ export default class Raycaster {
       this.scene.children,
       true
     );
-
     const selectedObject = intersections[0].object;
     console.log(selectedObject.name);
 
-    selectedObject.material.color.set(0xf72585);
-    setTimeout(() => {
-      selectedObject.material.color.set(0xffffff);
-    }, 1000);
+    if (selectedObject.name === 'Frankie') {
+      {
+        const foundFrankieTexture = this.loader.load(
+          'ff-polka_green-cheer2.png'
+        );
+        foundFrankieTexture.colorSpace = THREE.SRGBColorSpace;
+        foundFrankieTexture.magFilter = THREE.NearestFilter;
+        selectedObject.material.map = foundFrankieTexture;
+      }
+      selectedObject.scale.set(2, 2, 2);
+      selectedObject.position.y = 4;
+    } else {
+      selectedObject.material.color.set(0xf72585);
+      setTimeout(() => {
+        selectedObject.material.color.set(0xffffff);
+      }, 1000);
+    }
+
     // }
   }
 }

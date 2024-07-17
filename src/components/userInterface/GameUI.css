@@ -2,6 +2,36 @@
   font-family: Picnic;
   src: url('../../assets/PicNic-Regular.woff');
 }
+@font-face {
+  font-family: Fredoka;
+  src: url('../../assets/FredokaOne-Regular.ttf');
+}
+
+.ui-title-card {
+  font-family: Fredoka;
+  font-size: 24px;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000,
+    1px -1px 0 #000;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 8px 8px 0px black;
+  padding: 20px;
+  margin: 1rem;
+  display: inline-block;
+  background: #72efdd;
+}
+
+.game-title {
+  font-family: Picnic;
+  background: #f15bb5;
+}
+
+.game-title h1 {
+  margin: 0;
+  font-size: 48px;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000,
+    1px -1px 0 #000;
+}
 
 .letter {
   display: inline-block;
@@ -12,22 +42,6 @@
   animation: shake 0.2s;
   padding: 0;
   margin: 0;
-}
-.game-title {
-  border: 2px solid black;
-  border-radius: 5px;
-  font-family: Picnic;
-  box-shadow: 8px 8px 0px black;
-  padding: 20px;
-  display: inline-block;
-  background: #f15bb5;
-}
-
-.game-title h1 {
-  margin: 0;
-  font-size: 48px;
-  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000,
-    1px -1px 0 #000;
 }
 
 @keyframes shake {

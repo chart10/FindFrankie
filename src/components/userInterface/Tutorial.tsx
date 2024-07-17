@@ -1,4 +1,4 @@
 const Tutorial = () => {
-  return <div>Tutorial</div>;
+  return <div className='ui-title-card'>Tutorial</div>;
 };
 export default Tutorial;

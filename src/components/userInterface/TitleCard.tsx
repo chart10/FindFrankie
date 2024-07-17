@@ -1,6 +1,6 @@
 const TitleCard = () => {
   return (
-    <div className='game-title'>
+    <div className='ui-title-card game-title'>
       <h1>
         <span className='letter'>F</span>
         <span className='letter'>i</span>

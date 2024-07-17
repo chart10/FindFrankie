@@ -1,4 +1,4 @@
 const GameStart = () => {
-  return <div>GameStart</div>;
+  return <div className='ui-title-card'>GameStart</div>;
 };
 export default GameStart;

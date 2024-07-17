@@ -31,7 +31,6 @@ export default class Raycaster {
       true
     );
     const selectedObject = intersections[0].object;
-    console.log(selectedObject.name);
 
     if (selectedObject.name === 'Frankie' && !this.gameStates.frankieFound) {
       this.gameStates.frankieFound = true;

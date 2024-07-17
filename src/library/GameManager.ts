@@ -5,7 +5,7 @@ import CameraControls from './scene-utilities/CameraControls';
 import Light from './scene-utilities/Light';
 import Ground from './scene-objects/Ground';
 import { Character } from './scene-objects/Character';
-import { characterSprites, frankieSprite } from './GameUtilities';
+import { groundSprite, characterSprites, frankieSprite } from './GameUtilities';
 import Raycaster from './scene-utilities/Raycaster';
 
 export default class GameManager {
@@ -80,7 +80,7 @@ export default class GameManager {
     this.directionalLight.setPosition(20, 100, 20);
     this.ambientLight.setPosition(5, 10, 5);
 
-    const ground = new Ground(40);
+    const ground = new Ground(40, groundSprite);
     this.scene.add(ground.mesh);
 
     for (let i = 0; i < this.characterCount; i++) {

@@ -23,3 +23,5 @@ export const characterSprites = [
 ];
 
 export const frankieSprite = ['characterSprites/ff-polka_green.png'];
+
+export const groundSprite = 'ground_tile1.png';

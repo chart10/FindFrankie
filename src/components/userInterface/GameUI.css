@@ -1,44 +1,34 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@font-face {
+  font-family: Picnic;
+  src: url('../../assets/PicNic-Regular.woff');
 }
-body,
-html {
+
+.letter {
+  display: inline-block;
+  /* animation: vertical-sway 2s;
+  animation-iteration-count: infinite; */
+}
+.letter:hover {
+  animation: shake 0.2s;
   padding: 0;
   margin: 0;
-  overflow: hidden;
-  height: 100%;
+}
+.game-title {
+  border: 2px solid black;
+  border-radius: 5px;
+  font-family: Picnic;
+  box-shadow: 8px 8px 0px black;
+  padding: 20px;
+  display: inline-block;
+  background: #f15bb5;
 }
 
-#threeJsCanvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  /* background: url('./assets/game-artwork/spaceBackground.jpg'); */
-  background-size: cover;
-  z-index: -1;
+.game-title h1 {
+  margin: 0;
+  font-size: 48px;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000,
+    1px -1px 0 #000;
 }
-
-/* @keyframes vertical-sway {
-  0% {
-    transform: translateY(5px);
-  }
-  25% {
-    transform: translateY(2px);
-  }
-  50% {
-    transform: translateY(0px);
-  }
-  75% {
-    transform: translateY(-2px);
-  }
-  100% {
-    transform: translateY(5px);
-  }
-} */
 
 @keyframes shake {
   0% {

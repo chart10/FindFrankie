@@ -49,7 +49,5 @@ export default class Raycaster {
         selectedObject.material.color.set(0xffffff);
       }, 1000);
     }
-
-    // }
   }
 }

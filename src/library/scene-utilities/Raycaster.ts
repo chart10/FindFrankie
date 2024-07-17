@@ -43,9 +43,7 @@ export default class Raycaster {
         foundFrankieTexture.magFilter = THREE.NearestFilter;
         selectedObject.material.map = foundFrankieTexture;
       }
-      // selectedObject.scale.set(2, 2, 2);
-      // selectedObject.position.y = 4;
-    } else {
+    } else if (selectedObject.name.startsWith('Civilian')) {
       selectedObject.material.color.set(0xf72585);
       setTimeout(() => {
         selectedObject.material.color.set(0xffffff);

@@ -19,6 +19,9 @@ html {
   display: block;
   /* background: url('./assets/game-artwork/spaceBackground.jpg'); */
   background-size: cover;
+}
+
+.canvas-dormant {
   z-index: -1;
 }
 

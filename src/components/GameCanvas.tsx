@@ -1,7 +1,11 @@
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import GameManager from '../library/GameManager';
 
-const GameCanvas = () => {
+interface props {
+  gameActive: boolean;
+}
+
+const GameCanvas: FC<props> = ({ gameActive }) => {
   useEffect(() => {
     const gameManager = new GameManager(
       document.getElementById('threeJsCanvas')!
@@ -12,7 +16,10 @@ const GameCanvas = () => {
 
   return (
     <>
-      <canvas id='threeJsCanvas'></canvas>
+      <canvas
+        id='threeJsCanvas'
+        className={gameActive ? '' : 'canvas-dormant'}
+      ></canvas>
     </>
   );
 };

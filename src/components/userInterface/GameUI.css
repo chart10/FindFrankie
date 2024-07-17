@@ -19,6 +19,7 @@
   margin: 1rem;
   display: inline-block;
   background: #72efdd;
+  cursor: pointer;
 }
 
 .game-title {

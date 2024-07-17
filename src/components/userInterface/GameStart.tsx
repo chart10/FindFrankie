@@ -13,7 +13,7 @@ const GameStart: FC<props> = ({ setGameActive }) => {
         setGameActive(true);
       }}
     >
-      GameStart
+      Start Game!
     </div>
   );
 };

@@ -1,19 +1,10 @@
-import { FC, useEffect } from 'react';
-import GameManager from '../library/GameManager';
+import { FC } from 'react';
 
 interface props {
   gameActive: boolean;
 }
 
 const GameCanvas: FC<props> = ({ gameActive }) => {
-  useEffect(() => {
-    const gameManager = new GameManager(
-      document.getElementById('threeJsCanvas')!
-    );
-    gameManager.initialize();
-    gameManager.animate();
-  }, []);
-
   return (
     <>
       <canvas

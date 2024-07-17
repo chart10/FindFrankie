@@ -19,7 +19,6 @@ export default class GameManager {
   ambientLight: Light;
   raycaster: Raycaster;
   gameStates: { frankieFound: boolean };
-  // frankieFound: boolean;
 
   // Character Objects
   characterCount: number;
@@ -75,7 +74,6 @@ export default class GameManager {
     );
     window.addEventListener('resize', () => this.onWindowResize(), false);
 
-    this.scene.background = new THREE.Color(0xfee440);
     this.mainCamera.setPosition(0, 20, 40);
     this.directionalLight.setPosition(20, 100, 20);
     this.ambientLight.setPosition(5, 10, 5);

@@ -6,6 +6,20 @@ export const sceneBoundary = 19;
 
 export const characterCount = 500;
 
-export const characterSprites = ['ff-wavy_red.png', 'ff-diagonal_blue.png'];
+export const characterSprites = [
+  'characterSprites/ff-diagonal_blue.png',
+  'characterSprites/ff-diagonal_flip_blue.png',
+  'characterSprites/ff-polka_blue.png',
+  'characterSprites/ff-polka_flip_blue.png',
+  'characterSprites/ff-wavy_blue.png',
+  'characterSprites/ff-wavy_flip_blue.png',
+  'characterSprites/ff-diagonal_red.png',
+  'characterSprites/ff-diagonal_flip_red.png',
+  'characterSprites/ff-polka_red.png',
+  'characterSprites/ff-polka_flip_red.png',
+  'characterSprites/ff-wavy_red.png',
+  'characterSprites/ff-wavy_flip_red.png',
+  'characterSprites/ff-polka_red.png',
+];
 
-export const frankieSprite = ['ff-polka_green.png'];
+export const frankieSprite = ['characterSprites/ff-polka_green.png'];

@@ -28,7 +28,6 @@ export class Character {
     this.loader = new THREE.TextureLoader();
     this.mesh = this.buildCharacterMesh(name, characterSprites);
     this.gameStates = gameStates;
-    console.log(gameStates);
   }
 
   buildCharacterMesh(name: string, characterSprites: string[]) {

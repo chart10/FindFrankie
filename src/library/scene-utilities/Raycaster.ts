@@ -33,11 +33,11 @@ export default class Raycaster {
     const selectedObject = intersections[0].object;
     console.log(selectedObject.name);
 
-    if (selectedObject.name === 'Frankie') {
+    if (selectedObject.name === 'Frankie' && !this.gameStates.frankieFound) {
       this.gameStates.frankieFound = true;
       {
         const foundFrankieTexture = this.loader.load(
-          'ff-polka_green-cheer2.png'
+          'characterSprites/ff-polka_green-cheer2.png'
         );
         foundFrankieTexture.colorSpace = THREE.SRGBColorSpace;
         foundFrankieTexture.magFilter = THREE.NearestFilter;

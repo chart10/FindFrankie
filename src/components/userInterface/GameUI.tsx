@@ -3,6 +3,7 @@ import './GameUI.css';
 import Tutorial from './Tutorial';
 import GameStart from './GameStart';
 import { FC } from 'react';
+import Instructions from './Instructions/Instructions';
 
 interface props {
   gameActive?: boolean;
@@ -10,7 +11,9 @@ interface props {
 }
 
 const GameUI: FC<props> = ({ gameActive, setGameActive }) => {
-  return (
+  return gameActive ? (
+    <Instructions />
+  ) : (
     <div className='ui-container'>
       <TitleCard />
       <div>

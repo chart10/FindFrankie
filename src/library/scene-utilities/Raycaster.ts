@@ -30,23 +30,25 @@ export default class Raycaster {
       this.scene.children,
       true
     );
-    const selectedObject = intersections[0].object;
+    if (intersections.length > 0) {
+      const selectedObject = intersections[0].object;
 
-    if (selectedObject.name === 'Frankie' && !this.gameStates.frankieFound) {
-      this.gameStates.frankieFound = true;
-      {
-        const foundFrankieTexture = this.loader.load(
-          'characterSprites/ff-polka_green-cheer2.png'
-        );
-        foundFrankieTexture.colorSpace = THREE.SRGBColorSpace;
-        foundFrankieTexture.magFilter = THREE.NearestFilter;
-        selectedObject.material.map = foundFrankieTexture;
+      if (selectedObject.name === 'Frankie' && !this.gameStates.frankieFound) {
+        this.gameStates.frankieFound = true;
+        {
+          const foundFrankieTexture = this.loader.load(
+            'characterSprites/ff-polka_green-cheer2.png'
+          );
+          foundFrankieTexture.colorSpace = THREE.SRGBColorSpace;
+          foundFrankieTexture.magFilter = THREE.NearestFilter;
+          selectedObject.material.map = foundFrankieTexture;
+        }
+      } else if (selectedObject.name.startsWith('Civilian')) {
+        selectedObject.material.color.set(0xf72585);
+        setTimeout(() => {
+          selectedObject.material.color.set(0xffffff);
+        }, 1000);
       }
-    } else if (selectedObject.name.startsWith('Civilian')) {
-      selectedObject.material.color.set(0xf72585);
-      setTimeout(() => {
-        selectedObject.material.color.set(0xffffff);
-      }, 1000);
     }
   }
 }

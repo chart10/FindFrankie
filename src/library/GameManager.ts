@@ -18,6 +18,8 @@ export default class GameManager {
   directionalLight: Light;
   ambientLight: Light;
   raycaster: Raycaster;
+  gameStates: { frankieFound: boolean };
+  // frankieFound: boolean;
 
   // Character Objects
   characterCount: number;
@@ -43,12 +45,18 @@ export default class GameManager {
       this.mainCamera.camera,
       this.renderer
     );
-    this.raycaster = new Raycaster(this.scene, this.mainCamera.camera);
+    this.gameStates = { frankieFound: false };
+
+    this.raycaster = new Raycaster(
+      this.scene,
+      this.mainCamera.camera,
+      this.gameStates
+    );
 
     this.directionalLight = new Light('directionalLight', 0xfffff, 5);
     this.ambientLight = new Light('ambientLight', 0xfffff, 1);
 
-    this.characterCount = 300;
+    this.characterCount = 50;
     this.characterCrowd = [];
     this.characterCrowdObject = new THREE.Object3D();
     this.frankieObject = new THREE.Object3D();
@@ -91,7 +99,7 @@ export default class GameManager {
     characterSprites: string[],
     sceneObject: THREE.Object3D
   ) {
-    const character = new Character(name, characterSprites);
+    const character = new Character(name, characterSprites, this.gameStates);
     character.setRandomPosition();
     this.characterCrowd.push(character);
     sceneObject.add(character.mesh);
@@ -107,6 +115,7 @@ export default class GameManager {
     this.characterCrowd.map((character) => {
       character.animateCharacter(this.mainCamera.camera.position);
     });
+    // console.log(this.gameStates.frankieFound);
   }
 
   render() {

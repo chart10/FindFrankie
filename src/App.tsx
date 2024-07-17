@@ -8,8 +8,6 @@ function App() {
   const [gameActive, setGameActive] = useState(false);
   const [currentGame, setCurrentGame] = useState({});
 
-  console.log(currentGame);
-
   useEffect(() => {
     const gameManager = new GameManager(
       document.getElementById('threeJsCanvas')!
@@ -21,7 +19,12 @@ function App() {
   return (
     <>
       <GameCanvas gameActive={gameActive} />
-      <GameUI gameActive={gameActive} setGameActive={setGameActive} />
+      <GameUI
+        gameActive={gameActive}
+        currentGame={currentGame}
+        setCurrentGame={setCurrentGame}
+        setGameActive={setGameActive}
+      />
     </>
   );
 }

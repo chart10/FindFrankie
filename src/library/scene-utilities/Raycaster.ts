@@ -5,12 +5,12 @@ export default class Raycaster {
   camera: THREE.Camera;
   loader: THREE.TextureLoader;
   // frankieFound: boolean;
-  gameStates: { frankieFound: boolean };
+  gameStates: { gameActive: boolean; frankieFound: boolean };
 
   constructor(
     scene: THREE.Scene,
     camera: THREE.Camera,
-    gameStates: { frankieFound: boolean }
+    gameStates: { gameActive: boolean; frankieFound: boolean }
   ) {
     this.scene = scene;
     this.camera = camera;
@@ -20,6 +20,9 @@ export default class Raycaster {
   }
 
   onClickGame(event: MouseEvent) {
+    if (!this.gameStates.gameActive) {
+      return;
+    }
     const mouseCoordinates = new THREE.Vector2(
       (event.clientX / window.innerWidth) * 2 - 1,
       -(event.clientY / window.innerHeight) * 2 + 1

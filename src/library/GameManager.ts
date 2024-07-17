@@ -18,13 +18,15 @@ export default class GameManager {
   directionalLight: Light;
   ambientLight: Light;
   raycaster: Raycaster;
-  gameStates: { frankieFound: boolean };
 
   // Character Objects
   characterCount: number;
   characterCrowdObject: THREE.Object3D;
   frankieObject: THREE.Object3D;
   characterCrowd: Character[];
+
+  // UI Variables
+  gameStates: { gameActive: boolean; frankieFound: boolean };
 
   constructor(canvas: HTMLElement) {
     this.scene = new THREE.Scene();
@@ -44,7 +46,7 @@ export default class GameManager {
       this.mainCamera.camera,
       this.renderer
     );
-    this.gameStates = { frankieFound: false };
+    this.gameStates = { gameActive: false, frankieFound: false };
 
     this.raycaster = new Raycaster(
       this.scene,
@@ -113,7 +115,6 @@ export default class GameManager {
     this.characterCrowd.map((character) => {
       character.animateCharacter(this.mainCamera.camera.position);
     });
-    // console.log(this.gameStates.frankieFound);
   }
 
   render() {
@@ -124,5 +125,10 @@ export default class GameManager {
     this.mainCamera.camera.aspect = window.innerWidth / window.innerHeight;
     this.mainCamera.camera.updateProjectionMatrix();
     this.renderer?.setSize(window.innerWidth, window.innerHeight);
+  }
+
+  startGame() {
+    this.gameStates = { ...this.gameStates, gameActive: true };
+    console.log('Start the game');
   }
 }

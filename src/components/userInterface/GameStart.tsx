@@ -1,16 +1,23 @@
 import { FC } from 'react';
+import GameManager from '../../library/GameManager';
 
 interface props {
-  gameActive?: boolean;
+  currentGame: GameManager;
   setGameActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentGame: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const GameStart: FC<props> = ({ setGameActive }) => {
+const GameStart: FC<props> = ({
+  currentGame,
+  setGameActive,
+  setCurrentGame,
+}) => {
   return (
     <div
       className='ui-title-card'
       onClick={() => {
         setGameActive(true);
+        currentGame.startGame();
       }}
     >
       Start Game!

@@ -13,7 +13,7 @@ export default class CameraControls {
     this.controls.maxDistance = 100;
     this.controls.minPolarAngle = 0.2 * Math.PI;
     this.controls.maxPolarAngle = 0.5 * Math.PI;
-    // this.controls.autoRotate = true;
+    this.controls.autoRotate = true;
     this.controls.autoRotateSpeed = 1;
   }
 }

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { SimplexNoise } from 'three/examples/jsm/Addons.js';
-import { sceneBoundary } from '../GameUtilities';
+import { sceneBoundary } from '../GameConstants';
 
 export class Character {
   mesh: THREE.Mesh;

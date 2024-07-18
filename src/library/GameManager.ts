@@ -4,7 +4,7 @@ import CameraControls from './scene-utilities/CameraControls';
 import Light from './scene-utilities/Light';
 import Ground from './scene-objects/Ground';
 import { Character } from './scene-objects/Character';
-import { groundSprite, characterSprites, frankieSprite } from './GameUtilities';
+import { groundSprite, characterSprites, frankieSprite } from './GameConstants';
 import Raycaster from './scene-utilities/Raycaster';
 
 export default class GameManager {

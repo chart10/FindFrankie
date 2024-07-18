@@ -48,11 +48,7 @@ export default class GameManager {
     );
     this.gameStates = { gameActive: false, frankieFound: false };
 
-    this.raycaster = new Raycaster(
-      this.scene,
-      this.mainCamera.camera,
-      this.gameStates
-    );
+    this.raycaster = new Raycaster(this);
 
     this.directionalLight = new Light('directionalLight', 0xfffff, 5);
     this.ambientLight = new Light('ambientLight', 0xfffff, 1);
@@ -127,8 +123,19 @@ export default class GameManager {
     this.renderer?.setSize(window.innerWidth, window.innerHeight);
   }
 
-  startGame() {
-    this.gameStates = { ...this.gameStates, gameActive: true };
+  setGameActive(state: boolean) {
+    this.gameStates.gameActive = state;
     console.log('Start the game');
+  }
+
+  isGameActive() {
+    return this.gameStates.gameActive;
+  }
+  setFrankieFound(state: boolean) {
+    this.gameStates.frankieFound = state;
+  }
+
+  isFrankieFound() {
+    return this.gameStates.frankieFound;
   }
 }

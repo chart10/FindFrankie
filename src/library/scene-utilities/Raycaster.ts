@@ -1,50 +1,48 @@
 import * as THREE from 'three';
+import GameManager from '../GameManager';
 export default class Raycaster {
   raycaster: THREE.Raycaster;
-  scene: THREE.Scene;
-  camera: THREE.Camera;
   loader: THREE.TextureLoader;
-  // frankieFound: boolean;
-  gameStates: { gameActive: boolean; frankieFound: boolean };
+  gameManager: GameManager;
 
-  constructor(
-    scene: THREE.Scene,
-    camera: THREE.Camera,
-    gameStates: { gameActive: boolean; frankieFound: boolean }
-  ) {
-    this.scene = scene;
-    this.camera = camera;
+  constructor(gameManager: GameManager) {
+    this.gameManager = gameManager;
     this.raycaster = new THREE.Raycaster();
     this.loader = new THREE.TextureLoader();
-    this.gameStates = gameStates;
   }
 
   onClickGame(event: MouseEvent) {
-    if (!this.gameStates.gameActive) {
+    if (!this.gameManager.isGameActive()) {
       return;
     }
     const mouseCoordinates = new THREE.Vector2(
       (event.clientX / window.innerWidth) * 2 - 1,
       -(event.clientY / window.innerHeight) * 2 + 1
     );
-    this.raycaster.setFromCamera(mouseCoordinates, this.camera);
+    this.raycaster.setFromCamera(
+      mouseCoordinates,
+      this.gameManager.mainCamera.camera
+    );
 
     const intersections = this.raycaster.intersectObjects(
-      this.scene.children,
+      this.gameManager.scene.children,
       true
     );
     if (intersections.length > 0) {
       const selectedObject = intersections[0].object;
 
-      if (selectedObject.name === 'Frankie' && !this.gameStates.frankieFound) {
-        this.gameStates.frankieFound = true;
+      if (
+        selectedObject.name === 'Frankie' &&
+        !this.gameManager.isFrankieFound()
+      ) {
+        this.gameManager.setFrankieFound(true);
         {
-          const foundFrankieTexture = this.loader.load(
+          const cheerTexture = this.loader.load(
             'characterSprites/ff-polka_green-cheer2.png'
           );
-          foundFrankieTexture.colorSpace = THREE.SRGBColorSpace;
-          foundFrankieTexture.magFilter = THREE.NearestFilter;
-          selectedObject.material.map = foundFrankieTexture;
+          cheerTexture.colorSpace = THREE.SRGBColorSpace;
+          cheerTexture.magFilter = THREE.NearestFilter;
+          selectedObject.material.map = cheerTexture;
         }
       } else if (selectedObject.name.startsWith('Civilian')) {
         selectedObject.material.color.set(0xf72585);

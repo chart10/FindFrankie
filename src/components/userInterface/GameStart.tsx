@@ -7,17 +7,13 @@ interface props {
   setCurrentGame: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const GameStart: FC<props> = ({
-  currentGame,
-  setGameActive,
-  setCurrentGame,
-}) => {
+const GameStart: FC<props> = ({ currentGame, setGameActive }) => {
   return (
     <div
       className='ui-title-card'
       onClick={() => {
         setGameActive(true);
-        currentGame.startGame();
+        currentGame.setGameActive(true);
       }}
     >
       Start Game!

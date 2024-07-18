@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import GameManager from '../GameManager';
+import { cheerSprite } from '../GameConstants';
+
 export default class Raycaster {
   raycaster: THREE.Raycaster;
   loader: THREE.TextureLoader;
@@ -34,16 +36,17 @@ export default class Raycaster {
       ) {
         this.gameManager.setFrankieFound(true);
         {
-          const cheerTexture = this.loader.load(
-            'characterSprites/ff-polka_green-cheer2.png'
-          );
+          const cheerTexture = this.loader.load(cheerSprite);
           cheerTexture.colorSpace = THREE.SRGBColorSpace;
           cheerTexture.magFilter = THREE.NearestFilter;
+          // @ts-expect-error (selectObject.materials exists)
           selectedObject.material.map = cheerTexture;
         }
       } else if (selectedObject.name.startsWith('Civilian')) {
+        // @ts-expect-error (selectObject.materials exists)
         selectedObject.material.color.set(0xf72585);
         setTimeout(() => {
+          // @ts-expect-error (selectObject.materials exists)
           selectedObject.material.color.set(0xffffff);
         }, 1000);
       }

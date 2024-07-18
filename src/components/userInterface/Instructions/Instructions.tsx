@@ -1,4 +1,5 @@
 import './Instructions.css';
+import { frankieSprite } from '../../../library/GameConstants';
 
 const Instructions = () => {
   return (
@@ -10,7 +11,7 @@ const Instructions = () => {
         </div>
         <img
           className='frankie-preview'
-          src='characterSprites/ff-polka_green.png'
+          src={frankieSprite[0]}
           height={'100px'}
           alt='frankie'
         />

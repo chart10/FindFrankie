@@ -19,7 +19,6 @@ export default class GameManager {
   ambientLight: Light;
 
   // Character Objects
-  characterCount: number;
   characterCrowdObject: THREE.Object3D;
   frankieObject: THREE.Object3D;
   characterCrowd: Character[];
@@ -58,7 +57,6 @@ export default class GameManager {
     this.directionalLight = new Light('directionalLight', 0xfffff, 5);
     this.ambientLight = new Light('ambientLight', 0xfffff, 1);
 
-    this.characterCount = 50;
     this.characterCrowd = [];
     this.characterCrowdObject = new THREE.Object3D();
     this.frankieObject = new THREE.Object3D();
@@ -91,6 +89,26 @@ export default class GameManager {
 
     const ground = new Ground(40, this.stage[this.currentLevel].groundSprite);
     this.scene.add(ground.mesh);
+
+    // Clear current characters
+    while (this.characterCrowdObject.children.length > 0) {
+      const character = this.characterCrowdObject.children[0];
+      this.characterCrowdObject.remove(character);
+      character.geometry.dispose();
+      character.material.dispose();
+    }
+
+    // if (this.characterCrowdObject.children.length > 0) {
+    //   console.log('Clearing characterCrowdObject.children');
+
+    //   this.characterCrowdObject.children.map((character) => {
+    //     console.log(character.parent);
+
+    //     this.characterCrowdObject.remove(character);
+    //   });
+    this.characterCrowd = [];
+
+    console.log(this.scene);
 
     for (let i = 0; i < this.stage[this.currentLevel].characterCount; i++) {
       const characterName = 'Civilian ' + i;
@@ -146,11 +164,12 @@ export default class GameManager {
       case 'easy':
         this.stage = easy;
     }
+    this.setGameActive(true);
   }
 
   setGameActive(state: boolean) {
     this.gameStates.gameActive = state;
-    console.log('Start the game');
+    this.initialize();
   }
 
   isGameActive() {
@@ -163,4 +182,8 @@ export default class GameManager {
   isFrankieFound() {
     return this.gameStates.frankieFound;
   }
+
+  // clearCharacters() {
+
+  // }
 }

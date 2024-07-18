@@ -31,8 +31,13 @@ export class Character {
   }
 
   buildCharacterMesh(name: string, characterSprites: string[]) {
-    const sprite =
-      characterSprites[Math.floor(Math.random() * characterSprites.length)];
+    let sprite;
+    if (name === 'Frankie') {
+      sprite = characterSprites[0];
+    } else {
+      sprite =
+        characterSprites[Math.floor(Math.random() * characterSprites.length)];
+    }
     const texture = this.loader.load(sprite);
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.magFilter = THREE.NearestFilter;

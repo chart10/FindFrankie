@@ -1,18 +1,20 @@
 import './Instructions.css';
-import { frankieSprite } from '../../../library/GameConstants';
+import { frankieSprites } from '../../../library/GameConstants';
 
 const Instructions = () => {
+  console.log(frankieSprites);
+
   return (
     <div className='instructions-container'>
       <div id='instructions' className='ui-title-card instructions-main'>
         <div className='instructions-text'>
           <p>Click on Frankie in the crowd below!</p>
-          <p>Frankie looks like this</p>
+          <p>Frankie's sweater looks like this:</p>
         </div>
         <img
           className='frankie-preview'
-          src={frankieSprite[0]}
-          height={'100px'}
+          src={frankieSprites[2]}
+          height={'50px'}
           alt='frankie'
         />
       </div>

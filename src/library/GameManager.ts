@@ -4,7 +4,11 @@ import CameraControls from './scene-utilities/CameraControls';
 import Light from './scene-utilities/Light';
 import Ground from './scene-objects/Ground';
 import { Character } from './scene-objects/Character';
-import { groundSprite, characterSprites, frankieSprite } from './GameConstants';
+import {
+  groundSprite,
+  characterSprites,
+  frankieSprites,
+} from './GameConstants';
 import Raycaster from './scene-utilities/Raycaster';
 
 export default class GameManager {
@@ -83,7 +87,7 @@ export default class GameManager {
         this.characterCrowdObject
       );
     }
-    this.initializeCharacter('Frankie', frankieSprite, this.frankieObject);
+    this.initializeCharacter('Frankie', frankieSprites, this.frankieObject);
   }
 
   initializeCharacter(

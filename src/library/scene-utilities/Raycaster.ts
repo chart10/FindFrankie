@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import GameManager from '../GameManager';
-import { cheerSprite } from '../GameConstants';
+import { frankieSprites } from '../GameConstants';
 
 export default class Raycaster {
   raycaster: THREE.Raycaster;
@@ -17,6 +17,8 @@ export default class Raycaster {
     if (!this.gameManager.isGameActive()) {
       return;
     }
+    console.log(frankieSprites);
+
     const mouseCoordinates = new THREE.Vector2(
       (event.clientX / window.innerWidth) * 2 - 1,
       -(event.clientY / window.innerHeight) * 2 + 1
@@ -36,7 +38,7 @@ export default class Raycaster {
       ) {
         this.gameManager.setFrankieFound(true);
         {
-          const cheerTexture = this.loader.load(cheerSprite);
+          const cheerTexture = this.loader.load(frankieSprites[1]);
           cheerTexture.colorSpace = THREE.SRGBColorSpace;
           cheerTexture.magFilter = THREE.NearestFilter;
           // @ts-expect-error (selectObject.materials exists)

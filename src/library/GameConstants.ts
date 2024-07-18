@@ -9,8 +9,8 @@ export const easyLevel = [
     ],
     frankieSprites: [
       'characterSprites/green/ff-polka_green.png',
-      'characterSprite/green/ff-polka_green-cheer.png',
-      'characterSprite/sweater/ff-polka_green-sweater.png',
+      'characterSprites/green/ff-polka_green-cheer.png',
+      'characterSprites/sweaters/ff-polka_green-sweater.png',
     ],
     cheerSprite: 'characterSprite/green/ff-polka_green-cheer.png',
   },
@@ -26,8 +26,8 @@ export const easyLevel = [
     ],
     frankieSprites: [
       'characterSprites/green/ff-polka_green.png',
-      'characterSprite/green/ff-polka_green-cheer.png',
-      'characterSprite/sweater/ff-polka_green-sweater.png',
+      'characterSprites/green/ff-polka_green-cheer.png',
+      'characterSprites/sweaters/ff-polka_green-sweater.png',
     ],
     cheerSprite: 'characterSprite/green/ff-polka_green-cheer.png',
   },
@@ -45,8 +45,8 @@ export const easyLevel = [
     ],
     frankieSprites: [
       'characterSprites/green/ff-polka_green.png',
-      'characterSprite/green/ff-polka_green-cheer.png',
-      'characterSprite/sweater/ff-polka_green-sweater.png',
+      'characterSprites/green/ff-polka_green-cheer.png',
+      'characterSprites/sweaters/ff-polka_green-sweater.png',
     ],
     cheerSprite: 'characterSprite/green/ff-polka_green-cheer.png',
   },
@@ -76,7 +76,11 @@ export const characterSprites = [
   'characterSprites/red/ff-polka_red.png',
 ];
 
-export const frankieSprite = ['characterSprites/green/ff-polka_green.png'];
+export const frankieSprites = [
+  'characterSprites/green/ff-polka_green.png',
+  'characterSprites/green/ff-polka_green-cheer.png',
+  'characterSprites/sweaters/ff-polka_green-sweater.png',
+];
 
 export const cheerSprite = 'characterSprites/green/ff-polka_green-cheer.png';
 

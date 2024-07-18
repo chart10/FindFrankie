@@ -20,7 +20,6 @@ export default class GameManager {
 
   // Character Objects
   characterCrowdObject: THREE.Object3D;
-  frankieObject: THREE.Object3D;
   characterCrowd: Character[];
 
   // UI Variables
@@ -59,9 +58,7 @@ export default class GameManager {
 
     this.characterCrowd = [];
     this.characterCrowdObject = new THREE.Object3D();
-    this.frankieObject = new THREE.Object3D();
     this.scene.add(this.characterCrowdObject);
-    this.scene.add(this.frankieObject);
 
     this.gameStates = {
       gameActive: false,
@@ -91,24 +88,7 @@ export default class GameManager {
     this.scene.add(ground.mesh);
 
     // Clear current characters
-    while (this.characterCrowdObject.children.length > 0) {
-      const character = this.characterCrowdObject.children[0];
-      this.characterCrowdObject.remove(character);
-      character.geometry.dispose();
-      character.material.dispose();
-    }
-
-    // if (this.characterCrowdObject.children.length > 0) {
-    //   console.log('Clearing characterCrowdObject.children');
-
-    //   this.characterCrowdObject.children.map((character) => {
-    //     console.log(character.parent);
-
-    //     this.characterCrowdObject.remove(character);
-    //   });
-    this.characterCrowd = [];
-
-    console.log(this.scene);
+    this.removeAllCharacters();
 
     for (let i = 0; i < this.stage[this.currentLevel].characterCount; i++) {
       const characterName = 'Civilian ' + i;
@@ -121,7 +101,7 @@ export default class GameManager {
     this.initializeCharacter(
       'Frankie',
       this.stage[this.currentLevel].frankieSprites,
-      this.frankieObject
+      this.characterCrowdObject
     );
   }
 
@@ -135,6 +115,18 @@ export default class GameManager {
     this.characterCrowd.push(character);
     sceneObject.add(character.mesh);
     return character;
+  }
+
+  removeAllCharacters() {
+    while (this.characterCrowdObject.children.length > 0) {
+      const character = this.characterCrowdObject.children[0];
+      this.characterCrowdObject.remove(character);
+      // @ts-expect-error (character.materials exists)
+      character.geometry.dispose();
+      // @ts-expect-error (character.materials exists)
+      character.material.dispose();
+    }
+    this.characterCrowd = [];
   }
 
   animate() {
@@ -169,12 +161,13 @@ export default class GameManager {
 
   setGameActive(state: boolean) {
     this.gameStates.gameActive = state;
-    this.initialize();
+    if (state) this.initialize();
   }
 
   isGameActive() {
     return this.gameStates.gameActive;
   }
+
   setFrankieFound(state: boolean) {
     this.gameStates.frankieFound = state;
   }
@@ -182,8 +175,4 @@ export default class GameManager {
   isFrankieFound() {
     return this.gameStates.frankieFound;
   }
-
-  // clearCharacters() {
-
-  // }
 }

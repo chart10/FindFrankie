@@ -13,7 +13,7 @@ export default class Raycaster {
   }
 
   onClickGame(event: MouseEvent) {
-    if (!this.gameManager.isGameActive()) {
+    if (!this.gameManager.isGameActive() || this.gameManager.isFrankieFound()) {
       return;
     }
     const mouseCoordinates = new THREE.Vector2(
@@ -34,6 +34,7 @@ export default class Raycaster {
         !this.gameManager.isFrankieFound()
       ) {
         this.gameManager.setFrankieFound(true);
+        this.gameManager.setGameActive(false);
         {
           const frankieSprite =
             this.gameManager.stage[this.gameManager.currentLevel]

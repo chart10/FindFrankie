@@ -19,10 +19,7 @@ export default class Raycaster {
       (event.clientX / window.innerWidth) * 2 - 1,
       -(event.clientY / window.innerHeight) * 2 + 1
     );
-    this.raycaster.setFromCamera(
-      mouseCoordinates,
-      this.gameManager.mainCamera.camera
-    );
+    this.raycaster.setFromCamera(mouseCoordinates, this.gameManager.camera);
 
     const intersections = this.raycaster.intersectObjects(
       this.gameManager.scene.children,

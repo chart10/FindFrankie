@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
-import PerspectiveCamera from './scene-utilities/PerspectiveCamera';
 import CameraControls from './scene-utilities/CameraControls';
 import Light from './scene-utilities/Light';
 import Ground from './scene-objects/Ground';
@@ -13,7 +12,7 @@ export default class GameManager {
   scene: THREE.Scene;
   renderer: THREE.WebGLRenderer;
   stats: Stats;
-  mainCamera: PerspectiveCamera;
+  camera: THREE.PerspectiveCamera;
   cameraControls: CameraControls;
   directionalLight: Light;
   ambientLight: Light;
@@ -36,16 +35,13 @@ export default class GameManager {
       alpha: true,
     });
     this.stats = new Stats();
-    this.mainCamera = new PerspectiveCamera(
+    this.camera = new THREE.PerspectiveCamera(
       45,
       window.innerWidth / window.innerHeight,
       1,
       200
     );
-    this.cameraControls = new CameraControls(
-      this.mainCamera.camera,
-      this.renderer
-    );
+    this.cameraControls = new CameraControls(this.camera, this.renderer);
     this.gameStates = { gameActive: false, frankieFound: false };
 
     this.raycaster = new Raycaster(this);
@@ -72,7 +68,7 @@ export default class GameManager {
     );
     window.addEventListener('resize', () => this.onWindowResize(), false);
 
-    this.mainCamera.setPosition(0, 20, 40);
+    this.camera.position.set(0, 20, 40);
     this.directionalLight.setPosition(20, 100, 20);
     this.ambientLight.setPosition(5, 10, 5);
 
@@ -109,17 +105,17 @@ export default class GameManager {
     this.cameraControls.controls.update();
 
     this.characterCrowd.map((character) => {
-      character.animateCharacter(this.mainCamera.camera.position);
+      character.animateCharacter(this.camera.position);
     });
   }
 
   render() {
-    this.renderer.render(this.scene, this.mainCamera.camera);
+    this.renderer.render(this.scene, this.camera);
   }
 
   onWindowResize() {
-    this.mainCamera.camera.aspect = window.innerWidth / window.innerHeight;
-    this.mainCamera.camera.updateProjectionMatrix();
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
     this.renderer?.setSize(window.innerWidth, window.innerHeight);
   }
 

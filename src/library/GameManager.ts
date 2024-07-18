@@ -4,23 +4,19 @@ import CameraControls from './scene-utilities/CameraControls';
 import Light from './scene-utilities/Light';
 import Ground from './scene-objects/Ground';
 import { Character } from './scene-objects/Character';
-import {
-  groundSprite,
-  characterSprites,
-  frankieSprites,
-} from './GameConstants';
+import { titleScene } from './GameConstants';
 import Raycaster from './scene-utilities/Raycaster';
 
 export default class GameManager {
-  // Scene Elements
+  // Scene Utilities
   scene: THREE.Scene;
   renderer: THREE.WebGLRenderer;
   stats: Stats;
   camera: THREE.PerspectiveCamera;
   cameraControls: CameraControls;
+  raycaster: Raycaster;
   directionalLight: Light;
   ambientLight: Light;
-  raycaster: Raycaster;
 
   // Character Objects
   characterCount: number;
@@ -29,7 +25,19 @@ export default class GameManager {
   characterCrowd: Character[];
 
   // UI Variables
-  gameStates: { gameActive: boolean; frankieFound: boolean };
+  gameStates: {
+    gameActive: boolean;
+    frankieFound: boolean;
+    difficulty: string;
+  };
+  stage: {
+    sceneBoundary: number;
+    characterCount: number;
+    groundSprite: string;
+    characterSprites: string[];
+    frankieSprites: string[];
+  }[];
+  currentLevel: number;
 
   constructor(canvas: HTMLElement) {
     this.scene = new THREE.Scene();
@@ -46,10 +54,7 @@ export default class GameManager {
       200
     );
     this.cameraControls = new CameraControls(this.camera, this.renderer);
-    this.gameStates = { gameActive: false, frankieFound: false };
-
     this.raycaster = new Raycaster(this);
-
     this.directionalLight = new Light('directionalLight', 0xfffff, 5);
     this.ambientLight = new Light('ambientLight', 0xfffff, 1);
 
@@ -59,6 +64,14 @@ export default class GameManager {
     this.frankieObject = new THREE.Object3D();
     this.scene.add(this.characterCrowdObject);
     this.scene.add(this.frankieObject);
+
+    this.gameStates = {
+      gameActive: false,
+      frankieFound: false,
+      difficulty: 'none',
+    };
+    this.stage = titleScene;
+    this.currentLevel = 0;
   }
 
   initialize() {
@@ -76,18 +89,22 @@ export default class GameManager {
     this.directionalLight.setPosition(20, 100, 20);
     this.ambientLight.setPosition(5, 10, 5);
 
-    const ground = new Ground(40, groundSprite);
+    const ground = new Ground(40, this.stage[this.currentLevel].groundSprite);
     this.scene.add(ground.mesh);
 
-    for (let i = 0; i < this.characterCount; i++) {
+    for (let i = 0; i < this.stage[this.currentLevel].characterCount; i++) {
       const characterName = 'Civilian ' + i;
       this.initializeCharacter(
         characterName,
-        characterSprites,
+        this.stage[this.currentLevel].characterSprites,
         this.characterCrowdObject
       );
     }
-    this.initializeCharacter('Frankie', frankieSprites, this.frankieObject);
+    this.initializeCharacter(
+      'Frankie',
+      this.stage[this.currentLevel].frankieSprites,
+      this.frankieObject
+    );
   }
 
   initializeCharacter(
@@ -121,6 +138,10 @@ export default class GameManager {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer?.setSize(window.innerWidth, window.innerHeight);
+  }
+
+  setDifficulty(difficulty: 'easy' | 'medium' | 'hard') {
+    this.gameStates.difficulty = difficulty;
   }
 
   setGameActive(state: boolean) {

@@ -2,8 +2,6 @@ import './Instructions.css';
 import { frankieSprites } from '../../../library/GameConstants';
 
 const Instructions = () => {
-  console.log(frankieSprites);
-
   return (
     <div className='instructions-container'>
       <div id='instructions' className='ui-title-card instructions-main'>

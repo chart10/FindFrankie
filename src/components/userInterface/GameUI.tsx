@@ -4,32 +4,20 @@ import Tutorial from './Tutorial';
 import GameStart from './GameStart';
 import { FC } from 'react';
 import Instructions from './Instructions/Instructions';
-import GameManager from '../../library/GameManager';
 
 interface props {
   gameActive: boolean;
-  currentGame: GameManager | object;
-  setCurrentGame: React.Dispatch<React.SetStateAction<boolean>>;
-  setGameActive: React.Dispatch<React.SetStateAction<boolean>>;
+  startGame(difficulty: string): void;
 }
 
-const GameUI: FC<props> = ({
-  gameActive,
-  currentGame,
-  setGameActive,
-  setCurrentGame,
-}) => {
+const GameUI: FC<props> = ({ gameActive, startGame }) => {
   return gameActive ? (
     <Instructions />
   ) : (
     <div className='ui-container'>
       <TitleCard />
-      <div>
-        <GameStart
-          currentGame={currentGame}
-          setGameActive={setGameActive}
-          setCurrentGame={setCurrentGame}
-        />
+      <div className='options-container'>
+        <GameStart startGame={startGame} />
         <Tutorial />
       </div>
     </div>

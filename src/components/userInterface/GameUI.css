@@ -65,6 +65,17 @@
   margin: 0;
 }
 
+.ui-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}
 @keyframes shake {
   0% {
     transform: translate(1px, 1px) rotate(0deg);

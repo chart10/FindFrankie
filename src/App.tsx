@@ -6,25 +6,29 @@ import GameManager from './library/GameManager';
 
 function App() {
   const [gameActive, setGameActive] = useState(false);
-  const [currentGame, setCurrentGame] = useState({});
+  const [gameManager, setGameManager] = useState<GameManager | null>(null);
 
   useEffect(() => {
-    const gameManager = new GameManager(
-      document.getElementById('threeJsCanvas')!
-    );
-    gameManager.initialize();
-    gameManager.animate();
-    setCurrentGame(gameManager);
+    const canvas = document.getElementById('threeJsCanvas');
+    if (!canvas) return;
+    const manager = new GameManager(canvas);
+    manager.initialize();
+    manager.animate();
+    setGameManager(manager);
   }, []);
+
+  const startGame = (difficulty: string) => {
+    if (gameManager) {
+      gameManager.setGameActive(true);
+      setGameActive(true);
+      console.log(gameManager.setGameActive);
+      console.log(difficulty);
+    }
+  };
   return (
     <>
       <GameCanvas gameActive={gameActive} />
-      <GameUI
-        gameActive={gameActive}
-        currentGame={currentGame}
-        setCurrentGame={setCurrentGame}
-        setGameActive={setGameActive}
-      />
+      <GameUI gameActive={gameActive} startGame={startGame} />
     </>
   );
 }

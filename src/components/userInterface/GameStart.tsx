@@ -1,22 +1,29 @@
-import { FC } from 'react';
-import GameManager from '../../library/GameManager';
+import { FC, useState } from 'react';
+import DiffcultyOption from './DifficultyOption/DiffcultyOption';
 
 interface props {
-  currentGame: GameManager;
-  setGameActive: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentGame: React.Dispatch<React.SetStateAction<boolean>>;
+  startGame(difficulty: string): void;
 }
 
-const GameStart: FC<props> = ({ currentGame, setGameActive }) => {
+const GameStart: FC<props> = ({ startGame }) => {
+  const [showDifficultyOptions, setShowDifficultyOptions] = useState(false);
   return (
-    <div
-      className='ui-title-card'
-      onClick={() => {
-        setGameActive(true);
-        currentGame.setGameActive(true);
-      }}
-    >
-      Start Game!
+    <div className='game-start-container'>
+      <div
+        className='ui-title-card'
+        onClick={() => {
+          // setGameActive(true);
+          // currentGame.setGameActive(true);
+          setShowDifficultyOptions(!showDifficultyOptions);
+        }}
+      >
+        Start Game!
+      </div>
+      {showDifficultyOptions && (
+        <div>
+          <DiffcultyOption difficulty='Easy' startGame={startGame} />
+        </div>
+      )}
     </div>
   );
 };

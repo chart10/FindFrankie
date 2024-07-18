@@ -4,7 +4,7 @@ import CameraControls from './scene-utilities/CameraControls';
 import Light from './scene-utilities/Light';
 import Ground from './scene-objects/Ground';
 import { Character } from './scene-objects/Character';
-import { titleScene } from './GameConstants';
+import { titleScene, easy } from './GameConstants';
 import Raycaster from './scene-utilities/Raycaster';
 
 export default class GameManager {
@@ -142,6 +142,10 @@ export default class GameManager {
 
   setDifficulty(difficulty: 'easy' | 'medium' | 'hard') {
     this.gameStates.difficulty = difficulty;
+    switch (difficulty) {
+      case 'easy':
+        this.stage = easy;
+    }
   }
 
   setGameActive(state: boolean) {

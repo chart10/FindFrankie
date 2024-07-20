@@ -89,6 +89,7 @@ export default class GameManager {
 
     // Clear current characters
     this.removeAllCharacters();
+    console.log(this.stage);
 
     for (let i = 0; i < this.stage[this.currentLevel].characterCount; i++) {
       const characterName = 'Civilian ' + i;
@@ -150,10 +151,10 @@ export default class GameManager {
     this.renderer?.setSize(window.innerWidth, window.innerHeight);
   }
 
-  setDifficulty(difficulty: 'easy' | 'medium' | 'hard') {
+  setDifficulty(difficulty: 'Easy' | 'Medium' | 'Hard') {
     this.gameStates.difficulty = difficulty;
     switch (difficulty) {
-      case 'easy':
+      case 'Easy':
         this.stage = easy;
     }
     this.setGameActive(true);

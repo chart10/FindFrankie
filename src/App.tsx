@@ -17,12 +17,10 @@ function App() {
     setGameManager(manager);
   }, []);
 
-  const startGame = (difficulty: string) => {
+  const startGame = (difficulty: 'Easy' | 'Medium' | 'Hard') => {
     if (gameManager) {
-      gameManager.setGameActive(true);
+      gameManager.setDifficulty(difficulty);
       setGameActive(true);
-      console.log(gameManager.setGameActive);
-      console.log(difficulty);
     }
   };
   return (

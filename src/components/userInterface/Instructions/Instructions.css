@@ -1,6 +1,8 @@
 .instructions-container {
   position: relative;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: -1;
 }
 
@@ -9,15 +11,36 @@
   position: relative;
   pointer-events: none;
   width: fit-content;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 .instructions-main p {
   margin: 0;
   text-align: right;
 }
 
-.instructions-sub {
-  width: 10vw;
+.controls-container {
+  position: absolute;
+  display: flex;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.controls-card {
+  gap: 1rem;
+  padding: 0.5rem;
+  width: 150px;
+}
+.controls-card p {
+}
+
+#level-counter,
+#back-button {
+  background: #9ef01a;
+}
+#level-counter p,
+#back-button p {
+  margin: 0;
 }
 
 .frankie-preview {

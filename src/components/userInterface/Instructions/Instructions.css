@@ -39,13 +39,18 @@
 #level-counter,
 #back-button {
   background: #9ef01a;
+  width: fit-content;
 }
 #level-counter p,
 #back-button p {
   margin: 0;
 }
 
+#level-counter {
+  grid-column-start: 2;
+}
 #back-button {
+  position: relative;
   z-index: 3;
 }
 

@@ -45,6 +45,10 @@
 .game-title {
   font-family: Picnic;
   background: #f15bb5;
+  grid-column-start: 3;
+  grid-row-start: 2;
+  width: fit-content;
+  height: fit-content;
 }
 
 .game-title h1 {
@@ -64,17 +68,28 @@
 }
 
 .ui-container {
-  display: flex;
-  /* flex-direction: column; */
+  /* display: flex;
+  flex-direction: column; */
+  display: grid;
+  grid-template-columns: 0.75fr 0.6fr 3fr 0.6fr 0.75fr;
+  grid-template-rows: 1fr 2fr 0.5fr 0.5fr 1fr;
+  justify-items: center;
   align-items: center;
-  justify-content: center;
 }
 
 .options-container {
   display: flex;
   flex-direction: row;
   align-items: start;
+  grid-column-start: 3;
+  grid-row-start: 3;
 }
+
+.difficulty-options-container {
+  grid-column-start: 3;
+  grid-row-start: 4;
+}
+
 @keyframes shake {
   0% {
     transform: translate(1px, 1px) rotate(0deg);

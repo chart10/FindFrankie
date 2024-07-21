@@ -2,9 +2,10 @@ import TitleCard from './TitleCard';
 import './GameUI.css';
 import Tutorial from './Tutorial';
 import GameStart from './GameStart';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Instructions from './Instructions/Instructions';
 import WinCard from './WinCard/WinCard';
+import DiffcultyOption from './DifficultyOption/DiffcultyOption';
 
 interface props {
   gameActive: boolean;
@@ -32,6 +33,8 @@ const GameUI: FC<props> = ({
   resetGame,
   advanceToNextLevel,
 }) => {
+  const [showDifficultyOptions, setShowDifficultyOptions] = useState(false);
+
   return (
     <div className='ui-container'>
       {gameActive && (
@@ -41,9 +44,20 @@ const GameUI: FC<props> = ({
         <>
           <TitleCard />
           <div className='options-container'>
-            <GameStart startGame={startGame} />
+            <GameStart
+              startGame={startGame}
+              showDifficultyOptions={showDifficultyOptions}
+              setShowDifficultyOptions={setShowDifficultyOptions}
+            />
             <Tutorial />
           </div>
+          {showDifficultyOptions && (
+            <div className='difficulty-options-container'>
+              <DiffcultyOption difficulty='Easy' startGame={startGame} />
+              <DiffcultyOption difficulty='Medium' startGame={startGame} />
+              <DiffcultyOption difficulty='Hard' startGame={startGame} />
+            </div>
+          )}
         </>
       )}
       {frankieFound && (

@@ -1,12 +1,15 @@
-import { FC, useState } from 'react';
-import DiffcultyOption from './DifficultyOption/DiffcultyOption';
+import { FC } from 'react';
 
 interface props {
   startGame(difficulty: string): void;
+  showDifficultyOptions: boolean;
+  setShowDifficultyOptions: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const GameStart: FC<props> = ({ startGame }) => {
-  const [showDifficultyOptions, setShowDifficultyOptions] = useState(false);
+const GameStart: FC<props> = ({
+  showDifficultyOptions,
+  setShowDifficultyOptions,
+}) => {
   return (
     <div className='game-start-container'>
       <div
@@ -19,11 +22,6 @@ const GameStart: FC<props> = ({ startGame }) => {
       >
         Start Game!
       </div>
-      {showDifficultyOptions && (
-        <div>
-          <DiffcultyOption difficulty='Easy' startGame={startGame} />
-        </div>
-      )}
     </div>
   );
 };

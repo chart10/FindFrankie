@@ -150,13 +150,17 @@ export default class GameManager extends EventTarget {
     this.renderer?.setSize(window.innerWidth, window.innerHeight);
   }
 
-  setDifficulty(difficulty: 'Easy' | 'Medium' | 'Hard') {
+  setDifficulty(difficulty: 'Easy' | 'Medium' | 'Hard' | 'Default') {
     this.gameStates.difficulty = difficulty;
     switch (difficulty) {
       case 'Easy':
         this.stage = easy;
+        break;
+      case 'Default':
+        this.stage = titleScene;
+        break;
     }
-    this.setGameActive(true);
+    // this.setGameActive(true);
   }
 
   setGameActive(state: boolean) {

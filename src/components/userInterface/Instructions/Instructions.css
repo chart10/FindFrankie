@@ -30,6 +30,7 @@
   gap: 1rem;
   padding: 1rem;
   width: 150px;
+  cursor: pointer;
 }
 
 #level-counter,

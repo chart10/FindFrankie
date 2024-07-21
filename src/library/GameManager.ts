@@ -88,9 +88,7 @@ export default class GameManager extends EventTarget {
     const ground = new Ground(40, this.stage[this.currentLevel].groundSprite);
     this.scene.add(ground.mesh);
 
-    // Clear current characters
     this.removeAllCharacters();
-    console.log(this.stage);
 
     for (let i = 0; i < this.stage[this.currentLevel].characterCount; i++) {
       const characterName = 'Civilian ' + i;
@@ -167,13 +165,14 @@ export default class GameManager extends EventTarget {
     this.dispatchEvent(new CustomEvent('gameActive', { detail: state }));
   }
 
-  isGameActive() {
-    return this.gameStates.gameActive;
-  }
-
   setFrankieFound(state: boolean) {
     this.gameStates.frankieFound = state;
     this.dispatchEvent(new CustomEvent('frankieFound', { detail: state }));
+    console.log('Frankie Found!!!');
+  }
+
+  isGameActive() {
+    return this.gameStates.gameActive;
   }
 
   isFrankieFound() {

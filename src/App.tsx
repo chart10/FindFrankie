@@ -15,7 +15,6 @@ const App: React.FC = () => {
     const manager = new GameManager(canvas);
     manager.initialize();
     manager.animate();
-    setGameManager(manager);
 
     const handleGameActive = (event: CustomEvent) => {
       setGameActive(event.detail);
@@ -23,27 +22,27 @@ const App: React.FC = () => {
 
     const handleFrankieFound = (event: CustomEvent) => {
       setFrankieFound(event.detail);
+      console.log('Frankie Found Frontend');
     };
 
-    gameManager?.addEventListener(
-      'gameActive',
-      handleGameActive as EventListener
-    );
-    gameManager?.addEventListener(
+    manager?.addEventListener('gameActive', handleGameActive as EventListener);
+    manager?.addEventListener(
       'frankieFound',
       handleFrankieFound as EventListener
     );
+    setGameManager(manager);
 
     // Clean up event listeners on unmount
     return () => {
-      gameManager?.removeEventListener(
+      manager?.removeEventListener(
         'gameActive',
         handleGameActive as EventListener
       );
-      gameManager?.removeEventListener(
+      manager?.removeEventListener(
         'frankieFound',
         handleFrankieFound as EventListener
       );
+      setGameManager(manager);
     };
   }, []);
 
@@ -56,7 +55,11 @@ const App: React.FC = () => {
   return (
     <>
       <GameCanvas gameActive={gameActive} />
-      <GameUI gameActive={gameActive} startGame={startGame} />
+      <GameUI
+        gameActive={gameActive}
+        frankieFound={frankieFound}
+        startGame={startGame}
+      />
     </>
   );
 };

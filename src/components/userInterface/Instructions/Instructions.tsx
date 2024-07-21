@@ -1,11 +1,18 @@
 import './Instructions.css';
-import { frankieSprites } from '../../../library/GameConstants';
 
 interface props {
   level: { currentLevel: number; lastLevel: number };
+  gameConstants: {
+    sceneBoundary: number;
+    characterCount: number;
+    groundSprite: string;
+    characterSprites: string[];
+    frankieSprites: string[];
+    cheerSprite: string;
+  }[];
 }
 
-const Instructions: React.FC<props> = ({ level }) => {
+const Instructions: React.FC<props> = ({ level, gameConstants }) => {
   return (
     <>
       <div className='instructions-container'>
@@ -19,7 +26,7 @@ const Instructions: React.FC<props> = ({ level }) => {
           </div>
           <img
             className='frankie-preview'
-            src={frankieSprites[2]}
+            src={gameConstants[level.currentLevel].frankieSprites[2]}
             height={'50px'}
             alt='frankie'
           />

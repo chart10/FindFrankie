@@ -10,6 +10,14 @@ interface props {
   gameActive: boolean;
   frankieFound: boolean;
   level: { currentLevel: number; lastLevel: number };
+  gameConstants: {
+    sceneBoundary: number;
+    characterCount: number;
+    groundSprite: string;
+    characterSprites: string[];
+    frankieSprites: string[];
+    cheerSprite: string;
+  }[];
   startGame(difficulty: string): void;
   advanceToNextLevel(): void;
   resetGame(): void;
@@ -19,13 +27,16 @@ const GameUI: FC<props> = ({
   gameActive,
   frankieFound,
   level,
+  gameConstants,
   startGame,
   advanceToNextLevel,
   resetGame,
 }) => {
   return (
     <div className='ui-container'>
-      {gameActive && <Instructions level={level} />}
+      {gameActive && (
+        <Instructions level={level} gameConstants={gameConstants} />
+      )}
       {!gameActive && (
         <>
           <TitleCard />

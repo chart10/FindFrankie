@@ -3,12 +3,14 @@ import './App.css';
 import GameCanvas from './components/GameCanvas';
 import GameUI from './components/userInterface/GameUI';
 import GameManager from './library/GameManager';
+import { titleScene } from './library/GameConstants';
 
 const App: React.FC = () => {
   const [gameActive, setGameActive] = useState(false);
   const [frankieFound, setFrankieFound] = useState(false);
   const [level, setLevel] = useState({ currentLevel: 0, lastLevel: 0 });
   const [gameManager, setGameManager] = useState<GameManager | null>(null);
+  const [gameConstants, setGameConstants] = useState(titleScene);
 
   useEffect(() => {
     const canvas = document.getElementById('threeJsCanvas');
@@ -28,6 +30,9 @@ const App: React.FC = () => {
     const handleFrankieFound = (event: CustomEvent) => {
       setFrankieFound(event.detail);
     };
+    const handleGameConstants = (event: CustomEvent) => {
+      setGameConstants(event.detail);
+    };
 
     manager?.addEventListener('gameActive', handleGameActive as EventListener);
     manager?.addEventListener(
@@ -37,6 +42,10 @@ const App: React.FC = () => {
     manager?.addEventListener(
       'frankieFound',
       handleFrankieFound as EventListener
+    );
+    manager?.addEventListener(
+      'setGameConstants',
+      handleGameConstants as EventListener
     );
     setGameManager(manager);
 
@@ -80,6 +89,7 @@ const App: React.FC = () => {
         gameActive={gameActive}
         frankieFound={frankieFound}
         level={level}
+        gameConstants={gameConstants}
         startGame={startGame}
         resetGame={resetGame}
         advanceToNextLevel={advanceToNextLevel}

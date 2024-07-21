@@ -160,6 +160,9 @@ export default class GameManager extends EventTarget {
         this.stage = titleScene;
         break;
     }
+    this.dispatchEvent(
+      new CustomEvent('setGameConstants', { detail: this.stage })
+    );
   }
 
   setGameActive(state: boolean) {

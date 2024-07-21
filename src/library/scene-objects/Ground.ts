@@ -11,12 +11,12 @@ export default class Ground {
       // 'ground.png'
       groundSprite
     );
-    groundTexture.wrapS = THREE.RepeatWrapping;
-    groundTexture.wrapT = THREE.RepeatWrapping;
-    groundTexture.magFilter = THREE.NearestFilter;
+    // groundTexture.wrapS = THREE.RepeatWrapping;
+    // groundTexture.wrapT = THREE.RepeatWrapping;
+    groundTexture.magFilter = THREE.LinearFilter;
     groundTexture.colorSpace = THREE.SRGBColorSpace;
-    const repeats = size / 4;
-    groundTexture.repeat.set(repeats, repeats);
+    // const repeats = size / 4;
+    // groundTexture.repeat.set(repeats, repeats);
     const geometry = new THREE.PlaneGeometry(size, size);
     const material = new THREE.MeshBasicMaterial({
       map: groundTexture,

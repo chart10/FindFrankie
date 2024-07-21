@@ -110,7 +110,12 @@ export default class GameManager extends EventTarget {
     characterSprites: string[],
     sceneObject: THREE.Object3D
   ) {
-    const character = new Character(name, characterSprites, this.gameStates);
+    const character = new Character(
+      name,
+      characterSprites,
+      this.gameStates,
+      this.stage[this.currentLevel].sceneBoundary
+    );
     character.setRandomPosition();
     this.characterCrowd.push(character);
     sceneObject.add(character.mesh);

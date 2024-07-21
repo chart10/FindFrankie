@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { SimplexNoise } from 'three/examples/jsm/Addons.js';
-import { sceneBoundary } from '../GameConstants';
 
 export class Character {
   mesh: THREE.Mesh;
@@ -12,11 +11,13 @@ export class Character {
   positiveXVelocity: boolean;
   positiveZVelocity: boolean;
   gameStates: { frankieFound: boolean };
+  sceneBoundary: number;
 
   constructor(
     name: string,
     characterSprites: string[],
     gameStates: { frankieFound: boolean },
+    sceneBoundary: number,
     simplexSpeed: number = 0.005,
     simplexOffset: number = 0
   ) {
@@ -28,6 +29,7 @@ export class Character {
     this.loader = new THREE.TextureLoader();
     this.mesh = this.buildCharacterMesh(name, characterSprites);
     this.gameStates = gameStates;
+    this.sceneBoundary = sceneBoundary;
   }
 
   buildCharacterMesh(name: string, characterSprites: string[]) {
@@ -57,10 +59,10 @@ export class Character {
 
   setRandomPosition() {
     const x =
-      Math.random() * sceneBoundary * (Math.round(Math.random()) ? 1 : -1);
+      Math.random() * this.sceneBoundary * (Math.round(Math.random()) ? 1 : -1);
     const y = 2;
     const z =
-      Math.random() * sceneBoundary * (Math.round(Math.random()) ? 1 : -1);
+      Math.random() * this.sceneBoundary * (Math.round(Math.random()) ? 1 : -1);
     this.mesh.position.set(x, y, z);
   }
 
@@ -69,13 +71,13 @@ export class Character {
       this.animateFrankieOnWin(2);
     } else {
       if (
-        this.mesh.position.z > sceneBoundary ||
-        this.mesh.position.z < -sceneBoundary
+        this.mesh.position.z > this.sceneBoundary ||
+        this.mesh.position.z < -this.sceneBoundary
       )
         this.positiveZVelocity = !this.positiveZVelocity;
       if (
-        this.mesh.position.x > sceneBoundary ||
-        this.mesh.position.x < -sceneBoundary
+        this.mesh.position.x > this.sceneBoundary ||
+        this.mesh.position.x < -this.sceneBoundary
       )
         this.positiveXVelocity = !this.positiveXVelocity;
 

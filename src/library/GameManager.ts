@@ -7,7 +7,7 @@ import { Character } from './scene-objects/Character';
 import { titleScene, easy } from './GameConstants';
 import Raycaster from './scene-utilities/Raycaster';
 
-export default class GameManager {
+export default class GameManager extends EventTarget {
   // Scene Utilities
   scene: THREE.Scene;
   renderer: THREE.WebGLRenderer;
@@ -38,6 +38,7 @@ export default class GameManager {
   currentLevel: number;
 
   constructor(canvas: HTMLElement) {
+    super();
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({
       canvas,
@@ -163,6 +164,7 @@ export default class GameManager {
   setGameActive(state: boolean) {
     this.gameStates.gameActive = state;
     if (state) this.initialize();
+    this.dispatchEvent(new CustomEvent('gameActive', { detail: state }));
   }
 
   isGameActive() {
@@ -171,6 +173,7 @@ export default class GameManager {
 
   setFrankieFound(state: boolean) {
     this.gameStates.frankieFound = state;
+    this.dispatchEvent(new CustomEvent('frankieFound', { detail: state }));
   }
 
   isFrankieFound() {

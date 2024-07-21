@@ -12,6 +12,7 @@ interface props {
   level: { currentLevel: number; lastLevel: number };
   startGame(difficulty: string): void;
   advanceToNextLevel(): void;
+  resetGame(): void;
 }
 
 const GameUI: FC<props> = ({
@@ -20,6 +21,7 @@ const GameUI: FC<props> = ({
   level,
   startGame,
   advanceToNextLevel,
+  resetGame,
 }) => {
   return (
     <div className='ui-container'>
@@ -33,7 +35,13 @@ const GameUI: FC<props> = ({
           </div>
         </>
       )}
-      {frankieFound && <WinCard advanceToNextLevel={advanceToNextLevel} />}
+      {frankieFound && (
+        <WinCard
+          level={level}
+          advanceToNextLevel={advanceToNextLevel}
+          resetGame={resetGame}
+        />
+      )}
     </div>
   );
 };

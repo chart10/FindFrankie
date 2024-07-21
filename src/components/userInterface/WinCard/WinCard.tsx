@@ -1,10 +1,15 @@
 import './WinCard.css';
 
 interface props {
+  level: { currentLevel: number; lastLevel: number };
   advanceToNextLevel(): void;
+  resetGame(): void;
 }
 
-const WinCard: React.FC<props> = ({ advanceToNextLevel }) => {
+const WinCard: React.FC<props> = ({ level, advanceToNextLevel, resetGame }) => {
+  console.log(level.currentLevel);
+  console.log(level.lastLevel);
+
   return (
     <div className='win-container'>
       <div className='ui-title-card game-title'>
@@ -28,9 +33,20 @@ const WinCard: React.FC<props> = ({ advanceToNextLevel }) => {
           <span className='letter'>e</span>
         </h1>
       </div>
-      <div className='ui-card ui-sub-card' onClick={advanceToNextLevel}>
-        <p>Next Level</p>
-      </div>
+      {level.currentLevel == level.lastLevel ? (
+        <>
+          <div className='ui-card ui-sub-card'>
+            <p>You beat Easy Mode!</p>
+          </div>
+          <div className='ui-card ui-sub-card' onClick={resetGame}>
+            <p>Main Menu</p>
+          </div>
+        </>
+      ) : (
+        <div className='ui-card ui-sub-card' onClick={advanceToNextLevel}>
+          <p>Next Level</p>
+        </div>
+      )}
     </div>
   );
 };

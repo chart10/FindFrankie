@@ -69,6 +69,7 @@ const App: React.FC = () => {
   const resetGame = () => {
     gameManager?.setDifficulty('Default');
     gameManager?.setCurrentLevel(0);
+    gameManager?.setFrankieFound(false);
     gameManager?.setGameActive(false);
   };
 
@@ -80,6 +81,7 @@ const App: React.FC = () => {
         frankieFound={frankieFound}
         level={level}
         startGame={startGame}
+        resetGame={resetGame}
         advanceToNextLevel={advanceToNextLevel}
       />
     </>

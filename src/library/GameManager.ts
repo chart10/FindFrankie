@@ -164,7 +164,7 @@ export default class GameManager extends EventTarget {
 
   setGameActive(state: boolean) {
     this.gameStates.gameActive = state;
-    if (state) this.initialize();
+    this.initialize();
     this.dispatchEvent(new CustomEvent('gameActive', { detail: state }));
   }
 

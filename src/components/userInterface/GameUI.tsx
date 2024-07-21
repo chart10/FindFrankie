@@ -38,7 +38,11 @@ const GameUI: FC<props> = ({
   return (
     <div className='ui-container'>
       {gameActive && (
-        <Instructions level={level} gameConstants={gameConstants} />
+        <Instructions
+          level={level}
+          gameConstants={gameConstants}
+          resetGame={resetGame}
+        />
       )}
       {!gameActive && (
         <>

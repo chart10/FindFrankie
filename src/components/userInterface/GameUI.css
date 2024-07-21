@@ -47,6 +47,7 @@
   background: #f15bb5;
   grid-column-start: 3;
   grid-row-start: 2;
+  align-self: end;
   width: fit-content;
   height: fit-content;
 }

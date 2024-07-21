@@ -10,9 +10,10 @@ interface props {
     frankieSprites: string[];
     cheerSprite: string;
   }[];
+  resetGame(): void;
 }
 
-const Instructions: React.FC<props> = ({ level, gameConstants }) => {
+const Instructions: React.FC<props> = ({ level, gameConstants, resetGame }) => {
   return (
     <>
       <div className='ui-card ui-sub-card' id='level-counter'>
@@ -32,7 +33,7 @@ const Instructions: React.FC<props> = ({ level, gameConstants }) => {
           />
         </div>
       </div>
-      <div className='ui-card ui-sub-card' id='back-button'>
+      <div className='ui-card ui-sub-card' id='back-button' onClick={resetGame}>
         <p>Back</p>
       </div>
       <div className='controls-container'>

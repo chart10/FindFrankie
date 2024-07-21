@@ -12,6 +12,9 @@ html {
   height: 100%;
   position: relative;
 }
+body p {
+  margin: 0;
+}
 
 #threeJsCanvas {
   position: absolute;

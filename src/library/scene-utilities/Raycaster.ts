@@ -34,7 +34,7 @@ export default class Raycaster {
         !this.gameManager.isFrankieFound()
       ) {
         this.gameManager.setFrankieFound(true);
-        this.gameManager.setGameActive(false);
+        // this.gameManager.setGameActive(false);
         {
           const frankieSprite =
             this.gameManager.stage[this.gameManager.currentLevel]

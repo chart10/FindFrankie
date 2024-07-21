@@ -4,18 +4,26 @@ import Tutorial from './Tutorial';
 import GameStart from './GameStart';
 import { FC } from 'react';
 import Instructions from './Instructions/Instructions';
-import WinCard from './WinCard';
+import WinCard from './WinCard/WinCard';
 
 interface props {
   gameActive: boolean;
   frankieFound: boolean;
+  currentLevel: number;
   startGame(difficulty: string): void;
+  advanceToNextLevel(): void;
 }
 
-const GameUI: FC<props> = ({ gameActive, frankieFound, startGame }) => {
+const GameUI: FC<props> = ({
+  gameActive,
+  frankieFound,
+  currentLevel,
+  startGame,
+  advanceToNextLevel,
+}) => {
   return (
     <div className='ui-container'>
-      {gameActive && <Instructions />}
+      {gameActive && <Instructions currentLevel={currentLevel} />}
       {!gameActive && (
         <>
           <TitleCard />
@@ -25,7 +33,7 @@ const GameUI: FC<props> = ({ gameActive, frankieFound, startGame }) => {
           </div>
         </>
       )}
-      {frankieFound && <WinCard />}
+      {frankieFound && <WinCard advanceToNextLevel={advanceToNextLevel} />}
     </div>
   );
 };

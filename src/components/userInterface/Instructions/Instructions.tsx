@@ -1,12 +1,16 @@
 import './Instructions.css';
 import { frankieSprites } from '../../../library/GameConstants';
 
-const Instructions = () => {
+interface props {
+  currentLevel: number;
+}
+
+const Instructions: React.FC<props> = ({ currentLevel }) => {
   return (
     <>
       <div className='instructions-container'>
         <div className='ui-card ui-sub-card' id='level-counter'>
-          <p>LV 1</p>
+          <p>LV {currentLevel + 1}</p>
         </div>
         <div id='instructions' className='ui-title-card instructions-main'>
           <div className='instructions-text'>

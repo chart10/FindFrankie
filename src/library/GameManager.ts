@@ -165,6 +165,12 @@ export default class GameManager extends EventTarget {
     this.dispatchEvent(new CustomEvent('gameActive', { detail: state }));
   }
 
+  setCurrentLevel(level: number) {
+    if (level >= this.stage.length) return;
+    this.currentLevel = level;
+    this.dispatchEvent(new CustomEvent('currentLevel', { detail: level }));
+  }
+
   setFrankieFound(state: boolean) {
     this.gameStates.frankieFound = state;
     this.dispatchEvent(new CustomEvent('frankieFound', { detail: state }));

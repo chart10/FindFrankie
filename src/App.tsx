@@ -7,7 +7,7 @@ import GameManager from './library/GameManager';
 const App: React.FC = () => {
   const [gameActive, setGameActive] = useState(false);
   const [frankieFound, setFrankieFound] = useState(false);
-  const [currentLevel, setCurrentLevel] = useState(0);
+  const [level, setLevel] = useState({ currentLevel: 0, lastLevel: 0 });
   const [gameManager, setGameManager] = useState<GameManager | null>(null);
 
   useEffect(() => {
@@ -22,12 +22,11 @@ const App: React.FC = () => {
     };
 
     const handleUpdateLevel = (event: CustomEvent) => {
-      setCurrentLevel(event.detail);
+      setLevel(event.detail);
     };
 
     const handleFrankieFound = (event: CustomEvent) => {
       setFrankieFound(event.detail);
-      console.log('Frankie Found Frontend');
     };
 
     manager?.addEventListener('gameActive', handleGameActive as EventListener);
@@ -57,18 +56,21 @@ const App: React.FC = () => {
 
   const startGame = (difficulty: 'Easy' | 'Medium' | 'Hard') => {
     gameManager?.setDifficulty(difficulty);
+    gameManager?.setCurrentLevel(0);
     gameManager?.setGameActive(true);
   };
 
   const advanceToNextLevel = () => {
-    gameManager?.setCurrentLevel(currentLevel + 1);
+    gameManager?.setCurrentLevel(level.currentLevel + 1);
     gameManager?.setFrankieFound(false);
     gameManager?.setGameActive(true);
   };
 
-  // const resetGame = () => {
-  //   gameManager?.setCurrentLevel(0);
-  // }
+  const resetGame = () => {
+    gameManager?.setDifficulty('Default');
+    gameManager?.setCurrentLevel(0);
+    gameManager?.setGameActive(false);
+  };
 
   return (
     <>
@@ -76,7 +78,7 @@ const App: React.FC = () => {
       <GameUI
         gameActive={gameActive}
         frankieFound={frankieFound}
-        currentLevel={currentLevel}
+        level={level}
         startGame={startGame}
         advanceToNextLevel={advanceToNextLevel}
       />

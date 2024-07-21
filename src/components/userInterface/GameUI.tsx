@@ -9,7 +9,7 @@ import WinCard from './WinCard/WinCard';
 interface props {
   gameActive: boolean;
   frankieFound: boolean;
-  currentLevel: number;
+  level: { currentLevel: number; lastLevel: number };
   startGame(difficulty: string): void;
   advanceToNextLevel(): void;
 }
@@ -17,13 +17,13 @@ interface props {
 const GameUI: FC<props> = ({
   gameActive,
   frankieFound,
-  currentLevel,
+  level,
   startGame,
   advanceToNextLevel,
 }) => {
   return (
     <div className='ui-container'>
-      {gameActive && <Instructions currentLevel={currentLevel} />}
+      {gameActive && <Instructions level={level} />}
       {!gameActive && (
         <>
           <TitleCard />

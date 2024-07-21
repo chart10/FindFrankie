@@ -160,7 +160,6 @@ export default class GameManager extends EventTarget {
         this.stage = titleScene;
         break;
     }
-    // this.setGameActive(true);
   }
 
   setGameActive(state: boolean) {
@@ -172,7 +171,11 @@ export default class GameManager extends EventTarget {
   setCurrentLevel(level: number) {
     if (level >= this.stage.length) return;
     this.currentLevel = level;
-    this.dispatchEvent(new CustomEvent('currentLevel', { detail: level }));
+    this.dispatchEvent(
+      new CustomEvent('currentLevel', {
+        detail: { currentLevel: level, lastLevel: this.stage.length - 1 },
+      })
+    );
   }
 
   setFrankieFound(state: boolean) {
@@ -187,5 +190,9 @@ export default class GameManager extends EventTarget {
 
   isFrankieFound() {
     return this.gameStates.frankieFound;
+  }
+
+  isLastLevel() {
+    return this.currentLevel === this.stage.length - 1;
   }
 }

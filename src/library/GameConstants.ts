@@ -3,7 +3,7 @@ export const titleScene = [
     name: 'Default',
     sceneBoundary: 19,
     characterCount: 200,
-    groundSprite: 'groundSprites/ground_easy.png',
+    groundSprite: 'groundSprites/ground_default.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-diagonal_flip_blue.png',
@@ -97,7 +97,7 @@ export const medium = [
     name: 'Medium',
     sceneBoundary: 19,
     characterCount: 100,
-    groundSprite: 'groundSprites/ground_easy.png',
+    groundSprite: 'groundSprites/ground_medium.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-diagonal_flip_blue.png',
@@ -122,7 +122,7 @@ export const medium = [
     name: 'Medium',
     sceneBoundary: 19,
     characterCount: 150,
-    groundSprite: 'groundSprites/ground_easy.png',
+    groundSprite: 'groundSprites/ground_medium.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-diagonal_flip_blue.png',
@@ -153,7 +153,7 @@ export const medium = [
     name: 'Medium',
     sceneBoundary: 19,
     characterCount: 200,
-    groundSprite: 'groundSprites/ground_easy.png',
+    groundSprite: 'groundSprites/ground_medium.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-wavy_blue.png',

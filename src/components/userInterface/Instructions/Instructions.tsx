@@ -3,12 +3,12 @@ import './Instructions.css';
 interface props {
   level: { currentLevel: number; lastLevel: number };
   gameConstants: {
+    name: string;
     sceneBoundary: number;
     characterCount: number;
     groundSprite: string;
     characterSprites: string[];
     frankieSprites: string[];
-    cheerSprite: string;
   }[];
   resetGame(): void;
 }

@@ -4,7 +4,7 @@ import CameraControls from './scene-utilities/CameraControls';
 import Light from './scene-utilities/Light';
 import Ground from './scene-objects/Ground';
 import { Character } from './scene-objects/Character';
-import { titleScene, easy } from './GameConstants';
+import { titleScene, easy, medium } from './GameConstants';
 import Raycaster from './scene-utilities/Raycaster';
 
 export default class GameManager extends EventTarget {
@@ -160,6 +160,9 @@ export default class GameManager extends EventTarget {
     switch (difficulty) {
       case 'Easy':
         this.stage = easy;
+        break;
+      case 'Medium':
+        this.stage = medium;
         break;
       case 'Default':
         this.stage = titleScene;

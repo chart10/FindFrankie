@@ -2,13 +2,25 @@ import './WinCard.css';
 
 interface props {
   level: { currentLevel: number; lastLevel: number };
+  gameConstants: {
+    name: string;
+    sceneBoundary: number;
+    characterCount: number;
+    groundSprite: string;
+    characterSprites: string[];
+    frankieSprites: string[];
+  }[];
   advanceToNextLevel(): void;
   resetGame(): void;
 }
 
-const WinCard: React.FC<props> = ({ level, advanceToNextLevel, resetGame }) => {
-  console.log(level.currentLevel);
-  console.log(level.lastLevel);
+const WinCard: React.FC<props> = ({
+  level,
+  gameConstants,
+  advanceToNextLevel,
+  resetGame,
+}) => {
+  console.log(gameConstants);
 
   return (
     <div className='win-container'>
@@ -36,7 +48,7 @@ const WinCard: React.FC<props> = ({ level, advanceToNextLevel, resetGame }) => {
       {level.currentLevel == level.lastLevel ? (
         <>
           <div className='ui-card ui-sub-card'>
-            <p>You beat Easy Mode!</p>
+            <p>You beat {gameConstants[0].name} Mode!</p>
           </div>
           <div className='ui-card ui-sub-card' onClick={resetGame}>
             <p>Main Menu</p>

@@ -12,12 +12,12 @@ interface props {
   frankieFound: boolean;
   level: { currentLevel: number; lastLevel: number };
   gameConstants: {
+    name: string;
     sceneBoundary: number;
     characterCount: number;
     groundSprite: string;
     characterSprites: string[];
     frankieSprites: string[];
-    cheerSprite: string;
   }[];
   startGame(difficulty: string): void;
   resetGame(): void;
@@ -67,6 +67,7 @@ const GameUI: FC<props> = ({
       {frankieFound && (
         <WinCard
           level={level}
+          gameConstants={gameConstants}
           advanceToNextLevel={advanceToNextLevel}
           resetGame={resetGame}
         />

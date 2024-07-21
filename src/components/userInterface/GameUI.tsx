@@ -19,8 +19,8 @@ interface props {
     cheerSprite: string;
   }[];
   startGame(difficulty: string): void;
-  advanceToNextLevel(): void;
   resetGame(): void;
+  advanceToNextLevel(): void;
 }
 
 const GameUI: FC<props> = ({
@@ -29,8 +29,8 @@ const GameUI: FC<props> = ({
   level,
   gameConstants,
   startGame,
-  advanceToNextLevel,
   resetGame,
+  advanceToNextLevel,
 }) => {
   return (
     <div className='ui-container'>

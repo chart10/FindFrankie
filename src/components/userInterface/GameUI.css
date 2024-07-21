@@ -56,8 +56,6 @@
 
 .letter {
   display: inline-block;
-  /* animation: vertical-sway 2s;
-  animation-iteration-count: infinite; */
 }
 .letter:hover {
   animation: shake 0.2s;

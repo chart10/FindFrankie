@@ -1,6 +1,6 @@
 import TitleCard from './TitleCard';
 import './GameUI.css';
-import Tutorial from './Tutorial';
+import Tutorial from './Tutorial/Tutorial';
 import GameStart from './GameStart';
 import { FC, useState } from 'react';
 import Instructions from './Instructions/Instructions';
@@ -34,6 +34,7 @@ const GameUI: FC<props> = ({
   advanceToNextLevel,
 }) => {
   const [showDifficultyOptions, setShowDifficultyOptions] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(false);
 
   return (
     <div className='ui-container'>
@@ -48,12 +49,19 @@ const GameUI: FC<props> = ({
         <>
           <TitleCard />
           <div className='options-container'>
-            <GameStart
-              startGame={startGame}
-              showDifficultyOptions={showDifficultyOptions}
+            {!showTutorial && (
+              <GameStart
+                startGame={startGame}
+                showDifficultyOptions={showDifficultyOptions}
+                setShowDifficultyOptions={setShowDifficultyOptions}
+              />
+            )}
+            <Tutorial
+              gameConstants={gameConstants}
+              showTutorial={showTutorial}
+              setShowTutorial={setShowTutorial}
               setShowDifficultyOptions={setShowDifficultyOptions}
             />
-            <Tutorial />
           </div>
           {showDifficultyOptions && (
             <div className='difficulty-options-container'>

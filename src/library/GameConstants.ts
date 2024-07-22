@@ -3,7 +3,7 @@ export const titleScene = [
     name: 'Default',
     sceneBoundary: 19,
     characterCount: 200,
-    groundSprite: 'groundSprites/ground_default.png',
+    groundSprite: 'groundSprites/ground_funkyTiles.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-diagonal_flip_blue.png',
@@ -122,7 +122,7 @@ export const medium = [
     name: 'Medium',
     sceneBoundary: 19,
     characterCount: 150,
-    groundSprite: 'groundSprites/ground_medium.png',
+    groundSprite: 'groundSprites/ground_mutedTiles.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-diagonal_flip_blue.png',

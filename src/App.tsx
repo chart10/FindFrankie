@@ -48,6 +48,8 @@ const App: React.FC = () => {
       handleGameConstants as EventListener
     );
     setGameManager(manager);
+    setGameActive(false);
+    setFrankieFound(false);
 
     // Clean up event listeners on unmount
     return () => {

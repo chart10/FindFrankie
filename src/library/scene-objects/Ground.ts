@@ -13,7 +13,7 @@ export default class Ground {
     );
     // groundTexture.wrapS = THREE.RepeatWrapping;
     // groundTexture.wrapT = THREE.RepeatWrapping;
-    groundTexture.magFilter = THREE.LinearFilter;
+    groundTexture.magFilter = THREE.NearestFilter;
     groundTexture.colorSpace = THREE.SRGBColorSpace;
     // const repeats = size / 4;
     // groundTexture.repeat.set(repeats, repeats);

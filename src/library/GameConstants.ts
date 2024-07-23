@@ -47,7 +47,7 @@ export const easy = [
     nextMode: ['Medium', '#FFAA01'],
     sceneBoundary: 19,
     characterCount: 25,
-    groundSprite: 'groundSprites/ground_easy.png',
+    groundSprite: 'groundSprites/ground_funky-easyTiles.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/red/ff-diagonal_flip_red.png',
@@ -64,7 +64,7 @@ export const easy = [
     nextMode: ['Medium', '#FFAA01'],
     sceneBoundary: 19,
     characterCount: 50,
-    groundSprite: 'groundSprites/ground_easy.png',
+    groundSprite: 'groundSprites/ground_funky-easyTiles.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-wavy_blue.png',
@@ -83,7 +83,7 @@ export const easy = [
     nextMode: ['Medium', '#FFAA01'],
     sceneBoundary: 19,
     characterCount: 100,
-    groundSprite: 'groundSprites/ground_easy.png',
+    groundSprite: 'groundSprites/ground_funky-easyTiles.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-wavy_blue.png',
@@ -107,7 +107,7 @@ export const medium = [
     nextMode: ['Hard', '#FA452B'],
     sceneBoundary: 19,
     characterCount: 100,
-    groundSprite: 'groundSprites/ground_medium.png',
+    groundSprite: 'groundSprites/ground_funky-mediumTiles.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-diagonal_flip_blue.png',
@@ -134,7 +134,7 @@ export const medium = [
     nextMode: ['Hard', '#FA452B'],
     sceneBoundary: 19,
     characterCount: 150,
-    groundSprite: 'groundSprites/ground_mutedTiles.png',
+    groundSprite: 'groundSprites/ground_funky-mediumTiles.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-diagonal_flip_blue.png',
@@ -167,7 +167,7 @@ export const medium = [
     nextMode: ['Hard', '#FA452B'],
     sceneBoundary: 19,
     characterCount: 200,
-    groundSprite: 'groundSprites/ground_medium.png',
+    groundSprite: 'groundSprites/ground_funky-mediumTiles.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-diagonal_flip_blue.png',
@@ -209,7 +209,7 @@ export const hard = [
     nextMode: ['Easy', '#9DF019'],
     sceneBoundary: 19,
     characterCount: 300,
-    groundSprite: 'groundSprites/ground_medium.png',
+    groundSprite: 'groundSprites/ground_funky-hardTiles.png',
     characterSprites: ['characterSprites/violet/ff-diagonal_violet.png'],
     frankieSprites: [
       'characterSprites/violet/ff-diagonal_flip_violet.png',
@@ -223,7 +223,7 @@ export const hard = [
     nextMode: ['Easy', '#9DF019'],
     sceneBoundary: 19,
     characterCount: 400,
-    groundSprite: 'groundSprites/ground_medium.png',
+    groundSprite: 'groundSprites/ground_funky-hardTiles.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-diagonal_flip_blue.png',
@@ -256,7 +256,7 @@ export const hard = [
     nextMode: ['Easy', '#9DF019'],
     sceneBoundary: 19,
     characterCount: 500,
-    groundSprite: 'groundSprites/ground_medium.png',
+    groundSprite: 'groundSprites/ground_funky-hardTiles.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
       'characterSprites/blue/ff-diagonal_flip_blue.png',

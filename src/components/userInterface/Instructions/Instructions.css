@@ -48,6 +48,7 @@
 
 #level-counter {
   grid-column-start: 2;
+  min-width: max-content;
 }
 #back-button {
   position: relative;

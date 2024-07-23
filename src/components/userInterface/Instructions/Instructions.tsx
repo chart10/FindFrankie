@@ -22,8 +22,10 @@ const Instructions: React.FC<props> = ({ level, gameConstants, resetGame }) => {
       <div className='instructions-container'>
         <div id='instructions' className='ui-title-card instructions-main'>
           <div className='instructions-text'>
-            <p>Click on Frankie in the crowd below!</p>
-            <p>Frankie's sweater looks like this:</p>
+            <p>
+              Click on Frankie in the crowd below! Frankie's sweater looks like
+              this:
+            </p>
           </div>
           <img
             className='frankie-preview'

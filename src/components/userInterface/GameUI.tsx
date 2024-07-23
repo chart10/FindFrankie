@@ -88,6 +88,7 @@ const GameUI: FC<props> = ({
           gameConstants={gameConstants}
           advanceToNextLevel={advanceToNextLevel}
           resetGame={resetGame}
+          startGame={startGame}
         />
       )}
     </div>

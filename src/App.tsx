@@ -66,6 +66,7 @@ const App: React.FC = () => {
   }, []);
 
   const startGame = (difficulty: 'Easy' | 'Medium' | 'Hard') => {
+    gameManager?.setFrankieFound(false);
     gameManager?.setDifficulty(difficulty);
     gameManager?.setCurrentLevel(0);
     gameManager?.setGameActive(true);

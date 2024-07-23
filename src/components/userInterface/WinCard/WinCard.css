@@ -1,5 +1,4 @@
 .win-container {
-  position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -7,4 +6,19 @@
   grid-column: 3 / 6;
   grid-row: 3 / 6;
   justify-self: end;
+  margin-right: 1rem;
+}
+
+.win-title-container {
+  position: relative;
+}
+
+#win-title {
+  min-width: max-content;
+}
+
+#congrats {
+  position: absolute;
+  top: -25%;
+  right: -2%;
 }

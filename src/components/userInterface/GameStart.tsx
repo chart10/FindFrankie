@@ -17,7 +17,7 @@ const GameStart: FC<props> = ({
         onClick={() => {
           // setGameActive(true);
           // currentGame.setGameActive(true);
-          setShowDifficultyOptions(!showDifficultyOptions);
+          setShowDifficultyOptions(true);
         }}
       >
         Start Game!

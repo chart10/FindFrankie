@@ -2,7 +2,7 @@ export const titleScene = [
   {
     name: 'Default',
     sceneBoundary: 19,
-    characterCount: 200,
+    characterCount: 25,
     groundSprite: 'groundSprites/ground_funkyTiles.png',
     characterSprites: [
       'characterSprites/blue/ff-diagonal_blue.png',
@@ -271,6 +271,10 @@ export const hard = [
   },
 ];
 
-export const characterColors = [
-  0x9b5de5, 0x8c54ce, 0x7c4ab7, 0x6d41a0, 0xa56de8, 0xaf7dea,
+export const tutorialImages = [
+  'characterSprites/cheer/green/ff-polka_green-cheer.png',
+  'characterSprites/cheer/violet/ff-wavy_flip_violet-cheer.png',
+  'characterSprites/cheer/red/ff-diagonal_red-cheer.png',
+  'characterSprites/cheer/blue/ff-polka_flip_blue-cheer.png',
+  'characterSprites/sweaters/green/ff-polka_green-sweater.png',
 ];

@@ -8,6 +8,7 @@
 }
 
 .ui-card {
+  height: 100%;
   font-family: Fredoka;
   font-size: 24px;
   text-shadow: 2px 2px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000,
@@ -25,9 +26,12 @@
 .ui-sub-card {
   font-size: 16px;
   background: #9b5de5;
+  height: 100%;
 }
 
 .ui-title-card {
+  height: 100%;
+
   font-family: Fredoka;
   font-size: 24px;
   text-shadow: 2px 2px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000,
@@ -45,17 +49,21 @@
 .ui-container {
   display: grid;
   grid-template-columns: 0.75fr 0.6fr 3fr 0.6fr 0.75fr;
-  grid-template-rows: 1fr 1fr 0.5fr 0.5fr 1fr;
+  grid-template-rows: 3fr 4fr 2fr 2fr 0.5fr;
   justify-items: center;
   align-items: center;
   height: 100vh;
 }
 
 .game-title {
+  min-width: 350px;
   font-family: Picnic;
   background: #f15bb5;
   grid-column-start: 3;
   grid-row-start: 1;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
   width: fit-content;
   height: fit-content;
 }
@@ -82,17 +90,19 @@
   align-items: start;
   grid-column-start: 3;
   grid-row-start: 3;
+  max-height: 100%;
+  overflow: hidden;
+}
+.sub-options-container {
+  grid-column-start: 3;
+  grid-row-start: 4;
 }
 
 .difficulty-options-container {
   grid-column-start: 3;
   grid-row-start: 4;
-}
-
-.frankie-preview {
-  image-rendering: pixelated;
-  height: 8rem;
-  /* padding-left: 1.5rem; */
+  max-width: 100%;
+  max-height: 100%;
 }
 
 @keyframes shake {

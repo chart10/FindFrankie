@@ -50,19 +50,29 @@ const GameUI: FC<props> = ({
           <TitleCard />
           <div className='options-container'>
             {!showTutorial && (
-              <GameStart
-                startGame={startGame}
-                showDifficultyOptions={showDifficultyOptions}
-                setShowDifficultyOptions={setShowDifficultyOptions}
-              />
+              <>
+                <GameStart
+                  startGame={startGame}
+                  showDifficultyOptions={showDifficultyOptions}
+                  setShowDifficultyOptions={setShowDifficultyOptions}
+                />
+                <div
+                  className='ui-title-card'
+                  onClick={() => {
+                    setShowTutorial(true);
+                    setShowDifficultyOptions(false);
+                  }}
+                >
+                  Tutorial
+                </div>
+              </>
             )}
-            <Tutorial
-              gameConstants={gameConstants}
-              showTutorial={showTutorial}
-              setShowTutorial={setShowTutorial}
-              setShowDifficultyOptions={setShowDifficultyOptions}
-            />
           </div>
+          <Tutorial
+            showTutorial={showTutorial}
+            setShowTutorial={setShowTutorial}
+            setShowDifficultyOptions={setShowDifficultyOptions}
+          />
           {showDifficultyOptions && (
             <div className='difficulty-options-container'>
               <DiffcultyOption difficulty='Easy' startGame={startGame} />

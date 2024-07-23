@@ -4,6 +4,8 @@ interface props {
   level: { currentLevel: number; lastLevel: number };
   gameConstants: {
     name: string;
+    color: string;
+    nextMode: string;
     sceneBoundary: number;
     characterCount: number;
     groundSprite: string;
@@ -16,7 +18,11 @@ interface props {
 const Instructions: React.FC<props> = ({ level, gameConstants, resetGame }) => {
   return (
     <>
-      <div className='ui-card ui-sub-card' id='level-counter'>
+      <div
+        className='ui-card ui-sub-card'
+        id='level-counter'
+        style={{ background: `${gameConstants[0].color}` }}
+      >
         <p>LV {level.currentLevel + 1}</p>
       </div>
       <div className='instructions-container'>
@@ -35,7 +41,12 @@ const Instructions: React.FC<props> = ({ level, gameConstants, resetGame }) => {
           />
         </div>
       </div>
-      <div className='ui-card ui-sub-card' id='back-button' onClick={resetGame}>
+      <div
+        className='ui-card ui-sub-card'
+        id='back-button'
+        onClick={resetGame}
+        style={{ background: `${gameConstants[0].color}` }}
+      >
         <p>Back</p>
       </div>
       <div className='controls-container'>

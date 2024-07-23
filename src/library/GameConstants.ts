@@ -1,6 +1,8 @@
 export const titleScene = [
   {
     name: 'Default',
+    color: '#9A5DE4',
+    nextMode: 'Default',
     sceneBoundary: 19,
     characterCount: 25,
     groundSprite: 'groundSprites/ground_funkyTiles.png',
@@ -41,6 +43,8 @@ export const titleScene = [
 export const easy = [
   {
     name: 'Easy',
+    color: '#9DF019',
+    nextMode: ['Medium', '#FFAA01'],
     sceneBoundary: 19,
     characterCount: 25,
     groundSprite: 'groundSprites/ground_easy.png',
@@ -56,6 +60,8 @@ export const easy = [
   },
   {
     name: 'Easy',
+    color: '#9DF019',
+    nextMode: ['Medium', '#FFAA01'],
     sceneBoundary: 19,
     characterCount: 50,
     groundSprite: 'groundSprites/ground_easy.png',
@@ -73,6 +79,8 @@ export const easy = [
   },
   {
     name: 'Easy',
+    color: '#9DF019',
+    nextMode: ['Medium', '#FFAA01'],
     sceneBoundary: 19,
     characterCount: 100,
     groundSprite: 'groundSprites/ground_easy.png',
@@ -95,6 +103,8 @@ export const easy = [
 export const medium = [
   {
     name: 'Medium',
+    color: '#FFAA01',
+    nextMode: ['Hard', '#FA452B'],
     sceneBoundary: 19,
     characterCount: 100,
     groundSprite: 'groundSprites/ground_medium.png',
@@ -120,6 +130,8 @@ export const medium = [
   },
   {
     name: 'Medium',
+    color: '#FFAA01',
+    nextMode: ['Hard', '#FA452B'],
     sceneBoundary: 19,
     characterCount: 150,
     groundSprite: 'groundSprites/ground_mutedTiles.png',
@@ -151,6 +163,8 @@ export const medium = [
   },
   {
     name: 'Medium',
+    color: '#FFAA01',
+    nextMode: ['Hard', '#FA452B'],
     sceneBoundary: 19,
     characterCount: 200,
     groundSprite: 'groundSprites/ground_medium.png',
@@ -191,6 +205,8 @@ export const medium = [
 export const hard = [
   {
     name: 'Hard',
+    color: '#FA452B',
+    nextMode: ['Easy', '#9DF019'],
     sceneBoundary: 19,
     characterCount: 300,
     groundSprite: 'groundSprites/ground_medium.png',
@@ -203,6 +219,8 @@ export const hard = [
   },
   {
     name: 'Hard',
+    color: '#FA452B',
+    nextMode: ['Easy', '#9DF019'],
     sceneBoundary: 19,
     characterCount: 400,
     groundSprite: 'groundSprites/ground_medium.png',
@@ -234,6 +252,8 @@ export const hard = [
   },
   {
     name: 'Hard',
+    color: '#FA452B',
+    nextMode: ['Easy', '#9DF019'],
     sceneBoundary: 19,
     characterCount: 500,
     groundSprite: 'groundSprites/ground_medium.png',
@@ -270,6 +290,12 @@ export const hard = [
     ],
   },
 ];
+
+export const difficultyColors = {
+  easy: '#9DF019',
+  medium: '#FFAA01',
+  hard: '#FA452B',
+};
 
 export const tutorialImages = [
   'characterSprites/cheer/green/ff-polka_green-cheer.png',

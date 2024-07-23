@@ -4,6 +4,8 @@ interface props {
   level: { currentLevel: number; lastLevel: number };
   gameConstants: {
     name: string;
+    color: string;
+    nextMode: string;
     sceneBoundary: number;
     characterCount: number;
     groundSprite: string;
@@ -48,19 +50,24 @@ const WinCard: React.FC<props> = ({
           </h1>
         </div>
         {level.currentLevel === level.lastLevel && (
-          <div className='ui-card ui-sub-card' id='congrats'>
+          <div
+            className='ui-card ui-sub-card'
+            id='congrats'
+            style={{ background: `${gameConstants[0].color}` }}
+          >
             <p>You beat {gameConstants[0].name} Mode!</p>
           </div>
         )}
       </div>
       <div className='win-card-options-container'>
-        {level.currentLevel == level.lastLevel ? (
+        {level.currentLevel === level.lastLevel ? (
           <>
             <div
               className='ui-card ui-sub-card'
               onClick={() => startGame('Medium')}
+              style={{ background: `${gameConstants[0].nextMode[1]}` }}
             >
-              <p>Try Next Mode</p>
+              <p>Try {gameConstants[0].nextMode[0]} Mode</p>
             </div>
 
             <div className='ui-card ui-sub-card' onClick={resetGame}>

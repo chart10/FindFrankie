@@ -13,6 +13,8 @@ interface props {
   level: { currentLevel: number; lastLevel: number };
   gameConstants: {
     name: string;
+    color: string;
+    nextMode: string;
     sceneBoundary: number;
     characterCount: number;
     groundSprite: string;

@@ -6,10 +6,7 @@ interface props {
   setShowDifficultyOptions: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const GameStart: FC<props> = ({
-  showDifficultyOptions,
-  setShowDifficultyOptions,
-}) => {
+const GameStart: FC<props> = ({ setShowDifficultyOptions }) => {
   return (
     <div className='game-start-container'>
       <div

@@ -49,6 +49,8 @@
   justify-items: center;
   align-items: center;
   height: 100vh;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .game-title {

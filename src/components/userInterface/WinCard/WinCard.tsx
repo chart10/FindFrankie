@@ -78,7 +78,11 @@ const WinCard: React.FC<props> = ({
             </div>
           </>
         ) : (
-          <div className='ui-card ui-sub-card' onClick={advanceToNextLevel}>
+          <div
+            className='ui-card ui-sub-card'
+            onClick={advanceToNextLevel}
+            style={{ background: `${gameConstants.color}` }}
+          >
             <p>Next Level</p>
           </div>
         )}

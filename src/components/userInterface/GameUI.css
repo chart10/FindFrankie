@@ -20,7 +20,7 @@
   margin: 1rem;
   display: inline-block;
   background: #00f5d4;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .ui-sub-card {
@@ -43,7 +43,7 @@
   margin: 1rem;
   display: inline-block;
   background: #00f5d4;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .ui-container {

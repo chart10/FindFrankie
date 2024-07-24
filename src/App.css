@@ -10,6 +10,8 @@ html {
   overflow: hidden;
   height: 100%;
   position: relative;
+  cursor: url('/public/icons8-cursor-50.png'), auto;
+  cursor: url('/public/icons8-cursor-50.png'), pointer;
 }
 body p {
   margin: 0;

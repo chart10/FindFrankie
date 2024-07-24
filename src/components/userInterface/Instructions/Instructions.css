@@ -1,4 +1,5 @@
 .instructions-container {
+  grid-column-start: 3;
   position: relative;
   display: flex;
   align-items: center;
@@ -8,13 +9,14 @@
 
 .instructions-main {
   display: flex;
+  gap: 1rem;
   align-items: center;
   position: relative;
   width: fit-content;
 }
 .instructions-main p {
   margin: 0;
-  text-align: right;
+  text-align: center;
 }
 
 .controls-container {
@@ -44,6 +46,8 @@
 #back-button {
   background: #9ef01a;
   width: fit-content;
+  position: relative;
+  z-index: 3;
 }
 #level-counter p,
 #back-button p {
@@ -54,14 +58,61 @@
   grid-column-start: 2;
   min-width: max-content;
 }
-#back-button {
-  position: relative;
-  z-index: 3;
-}
 
 .frankie-preview {
   image-rendering: pixelated;
-  padding-left: 1.5rem;
+}
+
+@media screen and (max-width: 850px) {
+  .instructions-main {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 715px) {
+  .instructions-main {
+    font-size: 12px;
+  }
+  #level-counter,
+  #back-button {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 625px) {
+  .instructions-container {
+    grid-column: 2 / 5;
+    align-self: center;
+    justify-self: start;
+  }
+  #level-counter {
+    grid-column-start: 1;
+  }
+  #back-button {
+    grid-column-start: 5;
+  }
+}
+@media screen and (max-width: 467px) {
+  .instructions-container {
+    grid-column: 1 / 6;
+    align-self: center;
+    justify-self: start;
+  }
+  .instructions-main {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #level-counter {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    top: -190px;
+    left: 20px;
+  }
+  #back-button {
+    grid-column-start: 5;
+    grid-row-start: 2;
+    top: -190px;
+    left: -20px;
+  }
 }
 
 @keyframes shake {

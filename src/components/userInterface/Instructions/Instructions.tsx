@@ -53,10 +53,16 @@ const Instructions: React.FC<props> = ({ level, gameConstants, resetGame }) => {
         <p>Back</p>
       </div>
       <div className='controls-container'>
-        <div className='ui-card ui-sub-card controls-card'>
+        <div
+          className='ui-card ui-sub-card controls-card'
+          id='drag-control-card'
+        >
           <p>Click and drag to rock their world!</p>
         </div>
-        <div className='ui-card ui-sub-card controls-card'>
+        <div
+          className='ui-card ui-sub-card controls-card'
+          id='zoom-control-card'
+        >
           <p>Scroll to zoom in and out!</p>
         </div>
       </div>

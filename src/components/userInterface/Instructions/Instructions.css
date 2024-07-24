@@ -32,8 +32,12 @@
   /* cursor: pointer; */
   pointer-events: auto;
 }
-.control-card:hover {
-  animation: shake 0.2s;
+
+#drag-control-card:hover {
+  animation: shake 0.5s;
+}
+#zoom-control-card:hover {
+  animation: zoom 0.5s;
 }
 
 #level-counter,
@@ -93,5 +97,41 @@
   }
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.025);
+  }
+  20% {
+    transform: scale(1.05);
+  }
+  30% {
+    transform: scale(1.075);
+  }
+  40% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1.075);
+  }
+  80% {
+    transform: scale(1.05);
+  }
+  90% {
+    transform: scale(1.025);
+  }
+  100% {
+    transform: scale(1);
   }
 }

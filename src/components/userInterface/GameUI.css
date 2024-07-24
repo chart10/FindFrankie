@@ -8,7 +8,6 @@
 }
 
 .ui-card {
-  /* height: 100%; */
   font-family: Fredoka;
   font-size: 24px;
   text-shadow: 2px 2px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000,
@@ -20,7 +19,6 @@
   margin: 1rem;
   display: inline-block;
   background: #00f5d4;
-  /* cursor: pointer; */
 }
 
 .ui-sub-card {
@@ -31,7 +29,6 @@
 
 .ui-title-card {
   height: 100%;
-
   font-family: Fredoka;
   font-size: 24px;
   text-shadow: 2px 2px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000,
@@ -43,7 +40,6 @@
   margin: 1rem;
   display: inline-block;
   background: #00f5d4;
-  /* cursor: pointer; */
 }
 
 .ui-container {

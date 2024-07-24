@@ -90,7 +90,19 @@
   #back-button {
     grid-column-start: 5;
   }
+  .controls-container {
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 100vw;
+  }
+  .controls-card {
+    max-width: 100px;
+  }
+  .controls-card p {
+    font-size: 12px;
+  }
 }
+
 @media screen and (max-width: 467px) {
   .instructions-container {
     grid-column: 1 / 6;
@@ -112,6 +124,15 @@
     grid-row-start: 2;
     top: -190px;
     left: -20px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .instructions-container {
+    display: none;
+  }
+  .controls-container {
+    display: none;
   }
 }
 

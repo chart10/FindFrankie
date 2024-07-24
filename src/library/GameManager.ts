@@ -4,7 +4,7 @@ import CameraControls from './scene-utilities/CameraControls';
 import Light from './scene-utilities/Light';
 import Ground from './scene-objects/Ground';
 import { Character } from './scene-objects/Character';
-import { titleScene, easy, medium, hard } from './GameConstants';
+import { titleScene, easyMode, mediumMode, hardMode } from './GameConstants';
 import Raycaster from './scene-utilities/Raycaster';
 
 export default class GameManager extends EventTarget {
@@ -29,12 +29,18 @@ export default class GameManager extends EventTarget {
     difficulty: string;
   };
   stage: {
-    sceneBoundary: number;
-    characterCount: number;
-    groundSprite: string;
-    characterSprites: string[];
-    frankieSprites: string[];
-  }[];
+    name: string;
+    color: string;
+    nextMode: string;
+    nextModeColor: string;
+    levels: {
+      sceneBoundary: number;
+      characterCount: number;
+      groundSprite: string;
+      characterSprites: string[];
+      frankieSprites: string[];
+    }[];
+  };
   currentLevel: number;
 
   constructor(canvas: HTMLElement) {
@@ -85,22 +91,29 @@ export default class GameManager extends EventTarget {
     this.directionalLight.setPosition(20, 100, 20);
     this.ambientLight.setPosition(5, 10, 5);
 
-    const ground = new Ground(40, this.stage[this.currentLevel].groundSprite);
+    const ground = new Ground(
+      40,
+      this.stage.levels[this.currentLevel].groundSprite
+    );
     this.scene.add(ground.mesh);
 
     this.removeAllCharacters();
 
-    for (let i = 0; i < this.stage[this.currentLevel].characterCount; i++) {
+    for (
+      let i = 0;
+      i < this.stage.levels[this.currentLevel].characterCount;
+      i++
+    ) {
       const characterName = 'Civilian ' + i;
       this.initializeCharacter(
         characterName,
-        this.stage[this.currentLevel].characterSprites,
+        this.stage.levels[this.currentLevel].characterSprites,
         this.characterCrowdObject
       );
     }
     this.initializeCharacter(
       'Frankie',
-      this.stage[this.currentLevel].frankieSprites,
+      this.stage.levels[this.currentLevel].frankieSprites,
       this.characterCrowdObject
     );
   }
@@ -114,7 +127,7 @@ export default class GameManager extends EventTarget {
       name,
       characterSprites,
       this.gameStates,
-      this.stage[this.currentLevel].sceneBoundary
+      this.stage.levels[this.currentLevel].sceneBoundary
     );
     character.setRandomPosition();
     this.characterCrowd.push(character);
@@ -159,13 +172,13 @@ export default class GameManager extends EventTarget {
     this.gameStates.difficulty = difficulty;
     switch (difficulty) {
       case 'Easy':
-        this.stage = easy;
+        this.stage = easyMode;
         break;
       case 'Medium':
-        this.stage = medium;
+        this.stage = mediumMode;
         break;
       case 'Hard':
-        this.stage = hard;
+        this.stage = hardMode;
         break;
       case 'Default':
         this.stage = titleScene;
@@ -183,11 +196,14 @@ export default class GameManager extends EventTarget {
   }
 
   setCurrentLevel(level: number) {
-    if (level >= this.stage.length) return;
+    if (level >= this.stage.levels.length) return;
     this.currentLevel = level;
     this.dispatchEvent(
       new CustomEvent('currentLevel', {
-        detail: { currentLevel: level, lastLevel: this.stage.length - 1 },
+        detail: {
+          currentLevel: level,
+          lastLevel: this.stage.levels.length - 1,
+        },
       })
     );
   }
@@ -195,7 +211,6 @@ export default class GameManager extends EventTarget {
   setFrankieFound(state: boolean) {
     this.gameStates.frankieFound = state;
     this.dispatchEvent(new CustomEvent('frankieFound', { detail: state }));
-    console.log('Frankie Found!!!');
   }
 
   isGameActive() {
@@ -207,6 +222,6 @@ export default class GameManager extends EventTarget {
   }
 
   isLastLevel() {
-    return this.currentLevel === this.stage.length - 1;
+    return this.currentLevel === this.stage.levels.length - 1;
   }
 }

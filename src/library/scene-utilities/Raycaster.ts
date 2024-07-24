@@ -36,7 +36,7 @@ export default class Raycaster {
         this.gameManager.setFrankieFound(true);
         {
           const frankieSprite =
-            this.gameManager.stage[this.gameManager.currentLevel]
+            this.gameManager.stage.levels[this.gameManager.currentLevel]
               .frankieSprites[1];
           const cheerTexture = this.loader.load(frankieSprite);
           cheerTexture.colorSpace = THREE.SRGBColorSpace;

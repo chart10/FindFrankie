@@ -15,12 +15,15 @@ interface props {
     name: string;
     color: string;
     nextMode: string;
-    sceneBoundary: number;
-    characterCount: number;
-    groundSprite: string;
-    characterSprites: string[];
-    frankieSprites: string[];
-  }[];
+    nextModeColor: string;
+    levels: {
+      sceneBoundary: number;
+      characterCount: number;
+      groundSprite: string;
+      characterSprites: string[];
+      frankieSprites: string[];
+    }[];
+  };
   startGame(difficulty: string): void;
   resetGame(): void;
   advanceToNextLevel(): void;

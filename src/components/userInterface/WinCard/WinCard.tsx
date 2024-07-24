@@ -6,12 +6,15 @@ interface props {
     name: string;
     color: string;
     nextMode: string;
-    sceneBoundary: number;
-    characterCount: number;
-    groundSprite: string;
-    characterSprites: string[];
-    frankieSprites: string[];
-  }[];
+    nextModeColor: string;
+    levels: {
+      sceneBoundary: number;
+      characterCount: number;
+      groundSprite: string;
+      characterSprites: string[];
+      frankieSprites: string[];
+    }[];
+  };
   advanceToNextLevel(): void;
   resetGame(): void;
   startGame(difficulty: string): void;
@@ -53,9 +56,9 @@ const WinCard: React.FC<props> = ({
           <div
             className='ui-card ui-sub-card'
             id='congrats'
-            style={{ background: `${gameConstants[0].color}` }}
+            style={{ background: `${gameConstants.color}` }}
           >
-            <p>You beat {gameConstants[0].name} Mode!</p>
+            <p>You beat {gameConstants.name} Mode!</p>
           </div>
         )}
       </div>
@@ -65,9 +68,9 @@ const WinCard: React.FC<props> = ({
             <div
               className='ui-card ui-sub-card'
               onClick={() => startGame('Medium')}
-              style={{ background: `${gameConstants[0].nextMode[1]}` }}
+              style={{ background: `${gameConstants.nextModeColor}` }}
             >
-              <p>Try {gameConstants[0].nextMode[0]} Mode</p>
+              <p>Try {gameConstants.nextMode} Mode</p>
             </div>
 
             <div className='ui-card ui-sub-card' onClick={resetGame}>

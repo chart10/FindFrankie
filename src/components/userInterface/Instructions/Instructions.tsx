@@ -6,12 +6,15 @@ interface props {
     name: string;
     color: string;
     nextMode: string;
-    sceneBoundary: number;
-    characterCount: number;
-    groundSprite: string;
-    characterSprites: string[];
-    frankieSprites: string[];
-  }[];
+    nextModeColor: string;
+    levels: {
+      sceneBoundary: number;
+      characterCount: number;
+      groundSprite: string;
+      characterSprites: string[];
+      frankieSprites: string[];
+    }[];
+  };
   resetGame(): void;
 }
 
@@ -21,7 +24,7 @@ const Instructions: React.FC<props> = ({ level, gameConstants, resetGame }) => {
       <div
         className='ui-card ui-sub-card'
         id='level-counter'
-        style={{ background: `${gameConstants[0].color}` }}
+        style={{ background: `${gameConstants.color}` }}
       >
         <p>LV {level.currentLevel + 1}</p>
       </div>
@@ -35,7 +38,7 @@ const Instructions: React.FC<props> = ({ level, gameConstants, resetGame }) => {
           </div>
           <img
             className='frankie-preview'
-            src={gameConstants[level.currentLevel].frankieSprites[2]}
+            src={gameConstants.levels[level.currentLevel].frankieSprites[2]}
             height={'50px'}
             alt='frankie'
           />
@@ -45,7 +48,7 @@ const Instructions: React.FC<props> = ({ level, gameConstants, resetGame }) => {
         className='ui-card ui-sub-card'
         id='back-button'
         onClick={resetGame}
-        style={{ background: `${gameConstants[0].color}` }}
+        style={{ background: `${gameConstants.color}` }}
       >
         <p>Back</p>
       </div>

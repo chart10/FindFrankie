@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import Stats from 'three/examples/jsm/libs/stats.module.js';
 import CameraControls from './scene-utilities/CameraControls';
 import Light from './scene-utilities/Light';
 import Ground from './scene-objects/Ground';
@@ -11,7 +10,6 @@ export default class GameManager extends EventTarget {
   // Scene Utilities
   scene: THREE.Scene;
   renderer: THREE.WebGLRenderer;
-  stats: Stats;
   camera: THREE.PerspectiveCamera;
   cameraControls: CameraControls;
   raycaster: Raycaster;
@@ -51,7 +49,6 @@ export default class GameManager extends EventTarget {
       antialias: true,
       alpha: true,
     });
-    this.stats = new Stats();
     this.camera = new THREE.PerspectiveCamera(
       45,
       window.innerWidth / window.innerHeight,
@@ -79,7 +76,6 @@ export default class GameManager extends EventTarget {
   initialize() {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer.domElement);
-    document.body.appendChild(this.stats.dom);
     document.addEventListener(
       'mousedown',
       this.raycaster.onClickGame.bind(this.raycaster),
@@ -150,7 +146,6 @@ export default class GameManager extends EventTarget {
   animate() {
     window.requestAnimationFrame(this.animate.bind(this));
     this.render();
-    this.stats?.update();
     this.cameraControls.controls.update();
 
     this.characterCrowd.map((character) => {

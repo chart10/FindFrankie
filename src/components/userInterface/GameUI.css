@@ -45,7 +45,7 @@
 .ui-container {
   display: grid;
   grid-template-columns: 0.75fr 0.6fr 3fr 0.6fr 0.75fr;
-  grid-template-rows: 3fr 4fr 2fr 2fr 0.5fr;
+  grid-template-rows: 3fr 4fr 2fr 2fr 1fr;
   justify-items: center;
   align-items: center;
   height: 100vh;

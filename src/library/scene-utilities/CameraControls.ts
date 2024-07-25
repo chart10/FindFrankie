@@ -14,6 +14,6 @@ export default class CameraControls {
     this.controls.minPolarAngle = 0.2 * Math.PI;
     this.controls.maxPolarAngle = 0.5 * Math.PI;
     this.controls.autoRotate = true;
-    this.controls.autoRotateSpeed = 1;
+    this.controls.autoRotateSpeed = 0.5;
   }
 }

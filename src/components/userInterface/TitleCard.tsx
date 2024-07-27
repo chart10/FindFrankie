@@ -23,6 +23,7 @@ const TitleCard = () => {
           <span className='letter'>i</span>
           <span className='letter'>n</span>
           <span className='letter'>d</span>
+          &nbsp;
         </div>
         <div>
           <span className='letter'>F</span>

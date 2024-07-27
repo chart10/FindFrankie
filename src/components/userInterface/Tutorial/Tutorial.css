@@ -27,9 +27,6 @@
   flex-direction: column;
   overflow: hidden;
 }
-/* #tutorial-card1 p {
-  margin-bottom: 0.5rem;
-} */
 
 #tutorial-card2 {
   display: flex;
@@ -46,4 +43,11 @@
   image-rendering: pixelated;
   height: 8rem;
   align-self: center;
+}
+
+@media screen and (max-width: 467px) {
+  .tutorial-container {
+    grid-column: 1 / 5;
+    max-width: 100vw;
+  }
 }

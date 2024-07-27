@@ -72,12 +72,12 @@
 
 .game-title h1 {
   margin: 0;
-  font-size: 3rem;
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000,
     1px -1px 0 #000;
 }
 
 .letter {
+  font-size: 3rem;
   display: inline-block;
 }
 .letter:hover {

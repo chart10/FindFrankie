@@ -31,17 +31,21 @@ const WinCard: React.FC<props> = ({
     <div className='win-container'>
       <div className='win-title-container'>
         <div className='ui-title-card game-title' id='win-title'>
-          <h1>
+          <div>
             <span className='letter'>Y</span>
             <span className='letter'>o</span>
             <span className='letter'>u</span>
             &nbsp;
+          </div>
+          <div>
             <span className='letter'>F</span>
             <span className='letter'>o</span>
             <span className='letter'>u</span>
             <span className='letter'>n</span>
             <span className='letter'>d</span>
             &nbsp;
+          </div>
+          <div>
             <span className='letter'>F</span>
             <span className='letter'>r</span>
             <span className='letter'>a</span>
@@ -50,7 +54,7 @@ const WinCard: React.FC<props> = ({
             <span className='letter'>i</span>
             <span className='letter'>e</span>
             <span className='letter'>!</span>
-          </h1>
+          </div>
         </div>
         {level.currentLevel === level.lastLevel && (
           <div

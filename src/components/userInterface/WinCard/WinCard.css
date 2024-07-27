@@ -15,10 +15,42 @@
 
 #win-title {
   min-width: max-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-width: fit-content;
 }
 
 #congrats {
   position: absolute;
   top: -25%;
   right: -2%;
+}
+
+@media screen and (max-width: 800px) {
+  .win-container {
+    grid-column: 1 / 6;
+    grid-row-start: 2;
+    justify-self: center;
+    align-self: center;
+    max-width: 100%;
+    margin-right: unset;
+  }
+}
+@media screen and (max-width: 467px) {
+  .win-title-container {
+    max-width: 100%;
+    min-width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #win-title {
+    max-width: fit-content;
+    min-width: fit-content;
+    display: inline-flex;
+    justify-items: center;
+  }
 }

@@ -7,18 +7,12 @@ interface props {
 }
 
 const DiffcultyOption: FC<props> = ({ difficulty, startGame }) => {
-  let color;
-  switch (difficulty) {
-    case 'Easy':
-      color = difficultyColors.easy;
-      break;
-    case 'Medium':
-      color = difficultyColors.medium;
-      break;
-    case 'Hard':
-      color = difficultyColors.hard;
-      break;
-  }
+  const color =
+    {
+      Easy: difficultyColors.easy,
+      Medium: difficultyColors.medium,
+      Hard: difficultyColors.hard,
+    }[difficulty] || difficultyColors.easy;
   return (
     <div
       className='ui-card ui-sub-card'
